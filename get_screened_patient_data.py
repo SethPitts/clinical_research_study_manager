@@ -30,7 +30,7 @@ def get_screened_patient_data():
 
 def get_screening_time():
     """
-    Get time subject was screened from user
+    Get screening time from user
     :return: screening time as datetime object
     """
     while True:
@@ -50,7 +50,7 @@ def get_screening_time():
 
 def get_screening_date():
     """
-    Get screening data for screened subject
+    Get screening date from user
     :return: Screening date as datetime object
     """
     while True:
