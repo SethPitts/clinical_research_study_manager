@@ -1,4 +1,5 @@
 import openpyxl
+import sys
 
 def add_patient(excel_file: str, patient_data: dict, sheet_name: str):
     """
@@ -12,13 +13,24 @@ def add_patient(excel_file: str, patient_data: dict, sheet_name: str):
     data_sheet = data_work_book[sheet_name]
     headers = [cell.value for cell in data_sheet[1]]
     patient_data_headers = list(patient_data.keys())
-    if headers == patient_data_headers:
-        data_sheet.append([str(item)for item in list(patient_data.values())])
-        data_work_book.save(excel_file)
+    try:
+        if headers != patient_data_headers:
+            raise HeaderException(
+                'Your patient headers to not match your file header. Please check headers and try again')
+        if headers == patient_data_headers:
+            data_sheet.append([str(item)for item in list(patient_data.values())])
+            data_work_book.save(excel_file)
     # TODO: Replace this with an exception
-    else:
-        print("Your headers don't you match")
+    except HeaderException as e:
+        print(e)
         print(headers)
         print(list(patient_data_headers))
-        return None
+        sys.exit(1)
+    except Exception as e:
+        print("There was an {} error".format(e))
+        sys.exit(1)
 
+
+class HeaderException(ValueError):
+    def __init__(self, msg):
+        super().__init__(msg)

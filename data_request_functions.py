@@ -58,10 +58,10 @@ def get_info_from_user(requested_info: str):
     :return: value given by user as str
     """
     while True:
-        value_from_user = input("What is the {} for screened subject ".format(requested_info))
+        value_from_user = input("What is the {} for subject ".format(requested_info))
         # TODO: add validation for correct type input
         value_from_user = value_from_user.strip()
         if value_from_user:
             return value_from_user
         if not value_from_user:  # Bad entry
-            print("Please enter the screened subjects initials")
+            print("Please enter a valid {} for subject")
