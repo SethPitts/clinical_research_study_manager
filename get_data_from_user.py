@@ -1,11 +1,25 @@
 from collections import namedtuple
 import data_request_functions
 
-ScreenedPatient = namedtuple("Screened_Patient", ",".join(['screening_date','screening_time subject_initials',
-                                                   'medical_record_number', 'age', 'sex', 'eligibility_status',
-                                                   'reason_ineligible', 'enrollment_status', 'reason_not_enrolled',
-                                                   'research_assistant_initials'
-                                                   ]))
+ScreenedPatient = namedtuple("Screened_Patient", ",".join(['screening_date', 'screening_time subject_initials',
+                                                           'medical_record_number', 'age', 'sex', 'eligibility_status',
+                                                           'reason_ineligible', 'enrollment_status',
+                                                           'reason_not_enrolled', 'research_assistant_initials'
+                                                           ]))
+
+LinkedPatient = namedtuple("Linked_Patient", ",".join(['enrollment_date', 'enrollment_time', 'subject_id',
+                                                       'medical_record_number', 'age', 'sex', 'enrollment_arm',
+                                                       'research_assistant_initials'
+                                                       ]))
+
+FollowUpPatient = namedtuple("Follow_Up_Patient", ",".join(['enrollment_date', 'enrollment_time', 'subject_id',
+                                                            'follow_up_date', 'follow_up_time'
+                                                            ]))
+
+EnrolledPatient = namedtuple("Enrolled_Patient",
+                             ",".join(['enrollment_date', 'enrollment_time', 'subject_id', 'age', 'sex',
+                                       'enrollment_arm', 'research_assistant_initials'
+                                       ]))
 
 
 def get_screened_patient_data():
@@ -24,14 +38,10 @@ def get_screened_patient_data():
     patient_data['reason_ineligible'] = data_request_functions.get_info_from_user('reason ineligible')
     patient_data['enrollment_status'] = data_request_functions.get_info_from_user('enrollment status')
     patient_data['reason_not_enrolled'] = data_request_functions.get_info_from_user('reason not enrolled')
-    patient_data['research_assistant_initials'] = data_request_functions.get_info_from_user('research assistant initials')
+    patient_data['research_assistant_initials'] = data_request_functions.get_info_from_user(
+        'research assistant initials')
 
     return ScreenedPatient(**patient_data)
-
-LinkedPatient = namedtuple("Linked_Patient", ",".join(['enrollment_date', 'enrollment_time', 'subject_id',
-                                              'medical_record_number', 'age', 'sex', 'enrollment_arm',
-                                              'research_assistant_initials'
-                                              ]))
 
 
 def get_master_linking_log_data():
@@ -47,14 +57,10 @@ def get_master_linking_log_data():
     patient_data['age'] = data_request_functions.get_info_from_user('age')
     patient_data['sex'] = data_request_functions.get_info_from_user('sex')
     patient_data['enrollment_arm'] = data_request_functions.get_info_from_user('enrollment arm')
-    patient_data['research_assistant_initials'] = data_request_functions.get_info_from_user('research assistant initials')
+    patient_data['research_assistant_initials'] = data_request_functions.get_info_from_user(
+        'research assistant initials')
 
     return LinkedPatient(**patient_data)
-
-
-FollowUpPatient = namedtuple("Follow_Up_Patient", ",".join(['enrollment_date', 'enrollment_time', 'subject_id',
-                                                   'follow_up_date', 'follow_up_time'
-                                                   ]))
 
 
 def get_follow_up_data():
@@ -72,11 +78,6 @@ def get_follow_up_data():
     return FollowUpPatient(**patient_data)
 
 
-EnrolledPatient = namedtuple("Enrolled_Patient", ",".join(['enrollment_date', 'enrollment_time', 'subject_id', 'age', 'sex',
-                                                  'enrollment_arm', 'research_assistant_initials'
-                                                  ]))
-
-
 def get_enrolled_patient_data():
     """
     Get enrollment data for an enrolled subject
@@ -89,6 +90,22 @@ def get_enrolled_patient_data():
     patient_data['age'] = data_request_functions.get_info_from_user('age')
     patient_data['sex'] = data_request_functions.get_info_from_user('sex')
     patient_data['enrollment_arm'] = data_request_functions.get_info_from_user('enrollment arm')
-    patient_data['research_assistant_initials'] = data_request_functions.get_info_from_user('research assistant initials')
+    patient_data['research_assistant_initials'] = data_request_functions.get_info_from_user(
+        'research assistant initials')
 
     return EnrolledPatient(**patient_data)
+
+
+def main():
+    patient = get_screened_patient_data()
+    print(patient)
+    patient = get_enrolled_patient_data()
+    print(patient)
+    patient = get_master_linking_log_data()
+    print(patient)
+    patient = get_follow_up_data()
+    print(patient)
+
+
+if __name__ == '__main__':
+    main()
