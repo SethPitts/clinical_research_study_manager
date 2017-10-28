@@ -1,5 +1,7 @@
 import openpyxl
 import sys
+from exceptions import HeaderException
+
 
 def add_patient(excel_file: str, patient_data: dict, sheet_name: str):
     """
@@ -29,8 +31,3 @@ def add_patient(excel_file: str, patient_data: dict, sheet_name: str):
     except Exception as e:
         print("There was an {} error".format(e))
         sys.exit(1)
-
-
-class HeaderException(ValueError):
-    def __init__(self, msg):
-        super().__init__(msg)

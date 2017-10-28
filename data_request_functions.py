@@ -1,4 +1,5 @@
 import datetime
+from exceptions import InputException
 
 
 def get_date_info(time_point: str):
@@ -19,9 +20,11 @@ def get_date_info(time_point: str):
                 value_from_user = datetime.date.today()
                 break
             if not value_from_user.strip():  # Bad entry
-                print("Please enter a date or leave blank for Today")
+                raise InputException(
+                    "Please enter a valid {} date in the format MM/DD/YYYY or leave blank for today".format(time_point))
         except ValueError:
-            print("Please enter a date in the format MM/DD/YYYY")
+            # TODO: add better error messages to show why this failed
+            print("Please enter a valid {} date in the format MM/DD/YYYY".format(time_point))
             continue
     return value_from_user
 
@@ -44,10 +47,12 @@ def get_time_info(time_point: str):
                 value_from_user = datetime.datetime.time(datetime.datetime.now())
                 return value_from_user
             if not value_from_user.strip():  # Bad entry
-                print("Please enter a time or leave blank for now")
-                continue
+                raise InputException(
+                    'Please enter a valid {} time in the format HH:MM or leave blank for now'.format(time_point))
+        except InputException as e:
+            print(e)
         except ValueError:
-            print("Please enter a time in the format HH:MM")
+            print("Please enter a valid {} time in the format HH:MM or leave blank for now".format(time_point))
             continue
 
 
@@ -64,4 +69,4 @@ def get_info_from_user(requested_info: str):
         if value_from_user:
             return value_from_user
         if not value_from_user:  # Bad entry
-            print("Please enter a valid {} for subject")
+            print("Please enter a valid {} for subject".format(requested_info))
