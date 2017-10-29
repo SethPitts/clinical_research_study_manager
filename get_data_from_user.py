@@ -89,9 +89,9 @@ def get_follow_up_data():
     patient_data['Subject_ID'] = data_request_functions.get_info_from_user('subject id')
     patient_data['Enrollment_Date'] = data_request_functions.get_date_info('enrollment')
     patient_data['Enrollment_Time'] = data_request_functions.get_time_info('enrollment')
-    patient_data['Follow_Up_Date'] = data_request_functions.get_info_from_user('follow_up')
-    patient_data['Follow_Up_Time'] = data_request_functions.get_info_from_user('follow_up')
-    patient_data['Follow_Up_Complete'] = data_request_functions.get_info_from_user('follow_up_complete')
+    patient_data['Follow_Up_Date'] = data_request_functions.get_date_info('follow up')
+    patient_data['Follow_Up_Time'] = data_request_functions.get_time_info('follow up')
+    patient_data['Follow_Up_Complete'] = data_request_functions.get_info_from_user('follow up complete')
     patient_data['Notes'] = data_request_functions.get_info_from_user('notes')
     return FollowUpPatient(**patient_data)
 

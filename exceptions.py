@@ -13,5 +13,15 @@ class HeaderException(MyException):
 
 
 class InputException(MyException):
-    def __init__(self, msg):
+    def __init__(self, msg, input_type):
+        messages = dict()
+        messages['age'] = 'Please enter a number greater than 0'
+        messages['enrollment status'] = 'Please enter Y, N, NA'
+        messages['eligibility status'] = 'Please enter Y, N, NA'
+        messages['follow up complete'] = 'Please enter Y, N, NA'
+        messages['sex'] = 'Please enter M, F, O, U'
+        if messages.get(input_type) is not None:
+            msg = messages[input_type]
+        else:
+            msg = msg
         super().__init__(msg)

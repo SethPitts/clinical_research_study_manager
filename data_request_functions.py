@@ -55,6 +55,8 @@ def get_time_info(time_point: str):
             print("Please enter a valid {} time in the format HH:MM or leave blank for now".format(time_point))
             continue
 
+# TODO: Add a validation dictionary for each type of input
+
 
 def get_info_from_user(requested_info: str):
     """
@@ -62,11 +64,30 @@ def get_info_from_user(requested_info: str):
     :param requested_info: name of variable requested as str
     :return: value given by user as str
     """
+    validators = dict()
+
+    validators['age'] = lambda x: int(x) > 0
+    validators['sex'] = lambda x: x.lower() in ('m', 'f')
+    validators['enrollment status'] = lambda x: x.lower() in ('y', 'n')
+    validators['eligibility status'] = lambda x: x.lower() in ('y', 'n')
+    validators['follow up complete'] = lambda x: x.lower() in ('y', 'n')
     while True:
-        value_from_user = input("What is the {} for subject ".format(requested_info))
-        # TODO: add validation for correct type input
-        value_from_user = value_from_user.strip()
-        if value_from_user:
-            return value_from_user
-        if not value_from_user:  # Bad entry
-            print("Please enter a valid {} for subject".format(requested_info))
+        try:
+            value_from_user = input("What is the {} for subject ".format(requested_info))
+            # TODO: add validation for correct type input
+            value_from_user = value_from_user.strip()
+            if value_from_user:
+                # Check to see if we need to do special validation
+                if validators.get(requested_info) is not None:
+                    if validators[requested_info](value_from_user):
+                        return value_from_user
+                    else:
+                        raise InputException('Please enter a valid {} for subject'.format(requested_info),
+                                             requested_info)
+                else:
+                    return value_from_user
+            if not value_from_user:  # Bad entry
+                raise InputException("Please enter a valid {} for subject".format(requested_info), requested_info)
+        except InputException as e:
+            print(e)
+            continue
