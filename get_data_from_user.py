@@ -1,6 +1,7 @@
 from collections import namedtuple
-import data_request_functions
+
 import add_patient_to_excel_file
+import data_request_functions
 
 ScreenedPatient = namedtuple("Screened_Patient", ",".join(['Screening_Date', 'Screening_Time Subject_Initials',
                                                            'Medical_Record_Number', 'Age', 'Sex', 'Eligible',
@@ -8,10 +9,10 @@ ScreenedPatient = namedtuple("Screened_Patient", ",".join(['Screening_Date', 'Sc
                                                            'Reason_Not_Enrolled', 'Research_Assistant_Initials'
                                                            ]))
 EnrolledPatient = namedtuple("Enrolled_Patient",
-                             ",".join(['Subject_ID', 'Enrollment_Date', 'Enrollment_Time','Age', 'Sex',
+                             ",".join(['Subject_ID', 'Enrollment_Date', 'Enrollment_Time', 'Age', 'Sex',
                                        'Enrollment_Arm', 'Research_Assistant_Initials'
                                        ]))
-LinkedPatient = namedtuple("Linked_Patient", ",".join(['Subject_ID', 'Medical_Record_Number','Enrollment_Date',
+LinkedPatient = namedtuple("Linked_Patient", ",".join(['Subject_ID', 'Medical_Record_Number', 'Enrollment_Date',
                                                        'Enrollment_Time', 'Subject_Name', 'Age', 'Sex',
                                                        'Research_Assistant_Initials'
                                                        ]))
@@ -21,7 +22,7 @@ FollowUpPatient = namedtuple("Follow_Up_Patient", ",".join(['Subject_ID', 'Enrol
                                                             ]))
 
 
-def get_screened_patient_data():
+def get_screened_patient_data() -> ScreenedPatient:
     """
     Get screening data for a single screened subject
     :return: Named Tuple with subjects data
@@ -43,7 +44,7 @@ def get_screened_patient_data():
     return ScreenedPatient(**patient_data)
 
 
-def get_enrolled_patient_data():
+def get_enrolled_patient_data() -> EnrolledPatient:
     """
     Get enrollment data for an enrolled subject
     :return: Named Tuple with subjects data
@@ -61,7 +62,7 @@ def get_enrolled_patient_data():
     return EnrolledPatient(**patient_data)
 
 
-def get_master_linking_log_data():
+def get_master_linking_log_data() -> LinkedPatient:
     """
     Get master linking data for an enrolled subject
     :return: Named Tuple with subjects data
@@ -80,7 +81,7 @@ def get_master_linking_log_data():
     return LinkedPatient(**patient_data)
 
 
-def get_follow_up_data():
+def get_follow_up_data() -> FollowUpPatient:
     """
     Get follow up data for a single enrolled subject
     :return: Named Tuple with subjects data
@@ -109,6 +110,7 @@ def main():
     patient = get_follow_up_data()
     patient_data = patient._asdict()
     add_patient_to_excel_file.add_patient('Follow_Up_Log.xlsx', patient_data, 'Follow_Up_Log')
+
 
 if __name__ == '__main__':
     main()
