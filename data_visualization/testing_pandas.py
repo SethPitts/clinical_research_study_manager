@@ -9,7 +9,7 @@ ws = wb['Screening_Log']
 data = ws.values
 cols = next(data)
 data = list(data)
-idx = [r[0] for r in data]
+idx = [i + 1 for i, _ in enumerate(data)]
 data = (islice(r, 0, None) for r in data)
 df = pd.DataFrame(data, index=idx, columns=cols)
-print(df.keys())
+print(df['Screening_Time'])
