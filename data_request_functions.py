@@ -69,12 +69,16 @@ def get_info_from_user(requested_info: str):
     :return: value given by user as str
     """
     validators = dict()
+    greater_than_zero = lambda x: int(x) > 0 if x.isnumeric() else False
+    male_female = lambda x: x.lower() in ('m', 'f') if x.isalpha() else False
+    yes_no = lambda x: x.lower() in ('y', 'n') if x.isalpha() else False
 
-    validators['age'] = lambda x: int(x) > 0
-    validators['sex'] = lambda x: x.lower() in ('m', 'f')
-    validators['enrollment status'] = lambda x: x.lower() in ('y', 'n')
-    validators['eligibility status'] = lambda x: x.lower() in ('y', 'n')
-    validators['follow up complete'] = lambda x: x.lower() in ('y', 'n')
+    validators['age'] = greater_than_zero
+    validators['sex'] = male_female
+    validators['enrollment status'] = yes_no
+    validators['eligibility status'] = yes_no
+    validators['follow up complete'] = yes_no
+
     while True:
         try:
             value_from_user = input("What is the {} for subject ".format(requested_info))

@@ -1,3 +1,4 @@
+import os
 from collections import namedtuple
 
 import add_patient_to_excel_file
@@ -22,6 +23,16 @@ FollowUpPatient = namedtuple("Follow_Up_Patient", ",".join(['Subject_ID', 'Enrol
                                                             ]))
 
 
+def to_dict(func: namedtuple):
+    """Converts a named tuple to its order dictionary form"""
+
+    def wrapper(*args, **kwargs):
+        return func(*args, **kwargs)._asdict()
+
+    return wrapper
+
+
+@to_dict
 def get_screened_patient_data() -> ScreenedPatient:
     """
     Get screening data for a single screened subject
@@ -44,6 +55,7 @@ def get_screened_patient_data() -> ScreenedPatient:
     return ScreenedPatient(**patient_data)
 
 
+@to_dict
 def get_enrolled_patient_data() -> EnrolledPatient:
     """
     Get enrollment data for an enrolled subject
@@ -62,6 +74,7 @@ def get_enrolled_patient_data() -> EnrolledPatient:
     return EnrolledPatient(**patient_data)
 
 
+@to_dict
 def get_master_linking_log_data() -> LinkedPatient:
     """
     Get master linking data for an enrolled subject
@@ -81,6 +94,7 @@ def get_master_linking_log_data() -> LinkedPatient:
     return LinkedPatient(**patient_data)
 
 
+@to_dict
 def get_follow_up_data() -> FollowUpPatient:
     """
     Get follow up data for a single enrolled subject
@@ -98,18 +112,15 @@ def get_follow_up_data() -> FollowUpPatient:
 
 
 def main():
-    patient = get_screened_patient_data()
-    patient_data = patient._asdict()
-    add_patient_to_excel_file.add_patient('Screening_Log.xlsx', patient_data, 'Screening_Log')
-    patient = get_enrolled_patient_data()
-    patient_data = patient._asdict()
-    add_patient_to_excel_file.add_patient('Enrollment_Log.xlsx', patient_data, 'Enrollment_Log')
-    patient = get_master_linking_log_data()
-    patient_data = patient._asdict()
-    add_patient_to_excel_file.add_patient('Master_Linking_Log.xlsx', patient_data, 'Master_Linking_Log')
-    patient = get_follow_up_data()
-    patient_data = patient._asdict()
-    add_patient_to_excel_file.add_patient('Follow_Up_Log.xlsx', patient_data, 'Follow_Up_Log')
+    screened_patient_data = get_screened_patient_data()
+    add_patient_to_excel_file.add_patient(os.path.join('logs', 'Screening_Log.xlsx'), screened_patient_data,
+                                          'Screening_Log')
+    # enrolled_patient_data = get_enrolled_patient_data()
+    # add_patient_to_excel_file.add_patient(os.path.join('logs','Enrollment_Log.xlsx'), enrolled_patient_data, 'Enrollment_Log')
+    # linked_patient_data = get_master_linking_log_data()
+    # add_patient_to_excel_file.add_patient(os.path.join('logs','logs_with_phi', 'Master_Linking_Log.xlsx'), linked_patient_data, 'Master_Linking_Log')
+    # follow_up_patient_data = get_follow_up_data()
+    # add_patient_to_excel_file.add_patient(os.path.join('logs','Follow_Up_Log.xlsx'), follow_up_patient_data, 'Follow_Up_Log')
 
 
 if __name__ == '__main__':
