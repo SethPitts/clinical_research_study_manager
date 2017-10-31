@@ -37,23 +37,22 @@ def get_basic_stats(log, log_sheet):
     total_subjects_in_log = len(df)
     # Total by Sex
     if df.get('Sex') is not None:
-        df['Sex'].value_counts()
+        print(df['Sex'].value_counts())
     # Total by Age
     if df.get('Age') is not None:
-        df['Age'].value_counts()
+        print(df['Age'].value_counts())
     # Total Eligible
     if df.get('Eligible') is not None:
-        df['Eligible'].value_counts()
+        print(df['Eligible'].value_counts())
     # Reasons Ineligible
-    if df.get('Reason_Ineligible'):
-        df['Reason_Ineligible'].value_counts()
+    if df.get('Reason_Ineligible') is not None:
+        print(df['Reason_Ineligible'].value_counts())
     # Enrolled
-    if df.get('Enrolled'):
-        df['Enrolled'].value_counts()
+    if df.get('Enrolled') is not None:
+        print(df['Enrolled'].value_counts())
     # Reason Not Enrolled
     if df.get('Reason_Not_Enrolled') is not None:
-        df['Reason_Not_Enrolled'].value_counts()
-
+        print(df['Reason_Not_Enrolled'].value_counts())
     return None
 
 

@@ -2,7 +2,7 @@ import os
 
 import stats_functions
 
-BASE_DIR = os.path.join(__file__)
+BASE_DIR = os.path.dirname(__file__)
 
 screening_log_path = os.path.join(BASE_DIR, 'logs', 'Screening_Log.xlsx')
 
@@ -19,3 +19,11 @@ def get_screening_log_basic_stats():
 
 def get_screening_log_stats_by_time():
     stats_functions.get_stats_by_time(screening_log_path, 'Screening_Log')
+
+
+def main():
+    get_screening_log_basic_stats()
+
+
+if __name__ == '__main__':
+    main()
