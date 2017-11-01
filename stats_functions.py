@@ -37,10 +37,14 @@ def get_basic_stats(log, log_sheet):
     total_subjects_in_log = len(df)
     # Total by Sex
     if df.get('Sex') is not None:
-        print(df['Sex'].value_counts())
+        sex = (df['Sex'].value_counts())
+        print("Sex Stats")
+        print(sex.to_dict())
     # Total by Age
     if df.get('Age') is not None:
-        print(df['Age'].value_counts())
+        print("age stats")
+        age = (df['Age'].value_counts())
+        print(age.to_dict())
     # Total Eligible
     if df.get('Eligible') is not None:
         print(df['Eligible'].value_counts())

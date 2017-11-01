@@ -5,33 +5,38 @@ from collections import OrderedDict
 from add_patient_to_excel_file import add_patient
 
 
-def get_options():
-    options = dict()
-    get_int = lambda x, y: random.randint(x, y)
-    options['sex'] = ['M', 'F', 'U']
-    options['yes_no_unknown'] = ['Y', 'N', 'U']
-    options['yes_no_na'] = ['Y', 'N', 'NA']
-    options['reasons_not_eligible'] = ['unconsentable', 'does_not_meet_criteria', 'previously_enrolled', 'NA']
-    options['reasons_not_enrolled'] = ['declined', 'NA']
-    options['mrn'] = list(range(10000000, 20000000))
-    options['age'] = list(range(1, 100))
-    options['date'] = ['{}/{}/{}'.format(get_int(1, 12),
-                                         get_int(1, 28),
-                                         get_int(2012, 2016)
-                                         )
-                       ]
-    options['time'] = ['{}:{}'.format(get_int(0, 23),
-                                      get_int(0, 59)
-                                      )
-                       ]
-    options['initials'] = ['{}{}{}'.format(chr(get_int(97, 122)),
-                                           chr(get_int(97, 122)),
-                                           chr(get_int(97, 122))
+def get_int(x, y):
+    return random.randint(x, y)
+
+
+options = dict()
+options['sex'] = ['M', 'F', 'U']
+options['yes_no_unknown'] = ['Y', 'N', 'U']
+options['yes_no_na'] = ['Y', 'N', 'NA']
+options['reasons_not_eligible'] = ['unconsentable', 'does_not_meet_criteria', 'previously_enrolled', 'NA']
+options['reasons_not_enrolled'] = ['declined', 'NA']
+options['mrn'] = list(range(10000000, 20000000))
+options['age'] = list(range(1, 100))
+options['enrollment_arm'] = ['arm1', 'arm2']
+options['name'] = ['jane', 'doe', 'bob', 'marley']
+
+
+def get_options(options_dict=options):
+    options_dict['date'] = ['{}/{}/{}'.format(get_int(1, 12),
+                                              get_int(1, 28),
+                                              get_int(2012, 2016)
+                                              )
+                            ]
+    options_dict['time'] = ['{}:{}'.format(get_int(0, 23),
+                                           get_int(0, 59)
                                            )
-                           ]
+                            ]
+    options_dict['initials'] = ['{}{}{}'.format(chr(get_int(97, 122)),
+                                                chr(get_int(97, 122)),
+                                                chr(get_int(97, 122))
+                                                )
+                                ]
     options['subject_id'] = [get_int(1, 1000)]
-    options['enrollment_arm'] = ['arm1', 'arm2']
-    options['name'] = ['jane', 'doe', 'bob', 'marley']
     return options
 
 
@@ -113,6 +118,7 @@ def main():
         for _ in range(100):
             patient_dict = generate_patient_dict(data_func())
             add_patient(data_file, patient_dict, data_sheet)
+
 
 if __name__ == '__main__':
     main()
