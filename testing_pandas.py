@@ -15,6 +15,8 @@ def testing_pandas():
     idx = [i + 1 for i, _ in enumerate(data)]
     data = (islice(r, 0, None) for r in data)
     df = pd.DataFrame(data, index=idx, columns=cols)
+    df[['ScreeningDate']] = df[['ScreeningDate']].apply(pd.to_datetime)
+    df[['Age']] = df[['Age']].apply(pd.to_numeric)
     return df
 
 
