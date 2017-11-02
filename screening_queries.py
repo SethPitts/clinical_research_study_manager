@@ -19,12 +19,13 @@ def get_screening_log_basic_stats():
 
 
 def get_screening_log_stats_by_time():
-    stats_functions.get_stats_by_time(screening_log_path, 'Screening_Log')
+    stats_functions.get_stats_by_time(screening_log_path, 'Screening_Log', 'Screening')
 
 
 def main():
     # get_screening_log_basic_stats()
-    get_screening_log_stats_by_date()
+    # get_screening_log_stats_by_date()
+    get_screening_log_stats_by_time()
 
 
 if __name__ == '__main__':
