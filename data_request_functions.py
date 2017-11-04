@@ -14,7 +14,7 @@ def get_date_info(time_point: str):
             value_from_user = input("What is the {} date MM/DD/YYYY [Leave Blank for Today] ".format(time_point))
             # TODO: add validation for correct date input
             if value_from_user and value_from_user != ' ':  # Need better validation
-                day, month, year = value_from_user.split("/")
+                month, day, year = value_from_user.split("/")
                 value_from_user = datetime.datetime(int(year), int(month), int(day))
                 break
             if not value_from_user:
@@ -42,7 +42,7 @@ def get_time_info(time_point: str):
             value_from_user = input("What is the {} time MM:HH [Leave Blank for Today] ".format(time_point))
             # TODO: add validation for correct time input
             if value_from_user and value_from_user != " ":  # Need better validation
-                hour, minute = value_from_user.split(":")
+                minute, hour = value_from_user.split(":")
                 value_from_user = datetime.time(int(hour), int(minute))
                 return value_from_user
             if not value_from_user:
