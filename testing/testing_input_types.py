@@ -1,7 +1,7 @@
 import datetime
 from unittest.mock import patch
 
-import data_request_functions
+from research_study_manager import data_request_functions
 
 
 @patch('builtins.input', lambda x: '11/1/2017')

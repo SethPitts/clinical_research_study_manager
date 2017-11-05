@@ -1,10 +1,7 @@
-import os
-import sys
 import research_study_manager as rsm
 
 
 def manage_project(project_name: str, project_path: str):
-
     while True:
         # Ask for what the user would like to do
         print("1. Enter Patients on Screening Log")

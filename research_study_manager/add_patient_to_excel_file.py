@@ -1,6 +1,8 @@
-import openpyxl
 import sys
-from exceptions import HeaderException
+
+import openpyxl
+
+from research_study_manager.exceptions import HeaderException
 
 
 def add_patient(excel_file: str, patient_data: dict, sheet_name: str):
@@ -20,7 +22,7 @@ def add_patient(excel_file: str, patient_data: dict, sheet_name: str):
             raise HeaderException(
                 'Your patient headers to not match your file header. Please check headers and try again')
         if headers == patient_data_headers:
-            data_sheet.append([str(item)for item in list(patient_data.values())])
+            data_sheet.append([str(item) for item in list(patient_data.values())])
             data_work_book.save(excel_file)
     # TODO: Replace this with an exception
     except HeaderException as e:

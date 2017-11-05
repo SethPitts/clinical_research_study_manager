@@ -1,7 +1,7 @@
+import os
 from collections import OrderedDict
 
 import openpyxl
-import os
 
 
 def get_screening_headers() -> list:

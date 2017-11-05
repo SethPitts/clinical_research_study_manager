@@ -1,6 +1,7 @@
 import argparse
-import sys
 import os
+import sys
+
 from research_study_manager import create_directories, create_excel_files, load_project
 
 parser = argparse.ArgumentParser(prog='Research Study Manager',

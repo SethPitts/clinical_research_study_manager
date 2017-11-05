@@ -3,8 +3,8 @@ import os
 
 import pandas as pd
 
-from data_request_functions import get_date_info
-from stats_functions import create_dataframe_from_log
+from research_study_manager.data_request_functions import get_date_info
+from research_study_manager.stats_functions import create_dataframe_from_log
 
 BASE_DIR = os.path.dirname(__file__)
 

@@ -1,7 +1,7 @@
 import os
 from collections import namedtuple
 
-from research_study_manager import add_patient_to_excel_file,data_request_functions
+from research_study_manager import add_patient_to_excel_file, data_request_functions
 
 ScreenedPatient = namedtuple("ScreenedPatient", ",".join(['ScreeningDate', 'ScreeningTime SubjectInitials',
                                                           'MedicalRecordNumber', 'Age', 'Sex', 'Eligible',
