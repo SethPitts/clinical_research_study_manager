@@ -137,3 +137,13 @@ def get_stats_by_time(log_path, log_sheet, log_type):
     print("Stats for 23:00 - 07:00[Overnight")
     get_stats(data_frame=df_night)
     return df_morning, df_afternoon, df_evening, df_night
+
+
+def get_basic_plot(df, log_type):
+    # See subjects enrolled by date
+    column_for_group = '{}Date'.format(log_type)
+    df_count = pd.DataFrame(df[column_for_group], columns=[column_for_group])
+    df_count = df_count.groupby(column_for_group)[column_for_group].count()
+    plot = df_count.plot(kind='bar')
+    fig = plot.get_figure()
+    fig.savefig('output.png')

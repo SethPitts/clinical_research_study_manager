@@ -10,8 +10,9 @@ screening_log_path = os.path.join(BASE_DIR, 'logs', 'Screening_Log.xlsx')
 def get_screening_log_stats_by_date():
     start_date = input('What is the Start date [MM/DD/YYYY]? ')
     end_date = input('What is the End date [MM/DD/YYYY]? ')
-    stats_functions.get_basic_stats_by_date(
+    df = stats_functions.get_basic_stats_by_date(
         screening_log_path, 'Screening_Log', 'Screening', start_date, end_date)
+    stats_functions.get_basic_plot(df, 'Screening')
 
 
 def get_screening_log_basic_stats():
@@ -24,8 +25,8 @@ def get_screening_log_stats_by_time():
 
 def main():
     # get_screening_log_basic_stats()
-    # get_screening_log_stats_by_date()
-    get_screening_log_stats_by_time()
+    get_screening_log_stats_by_date()
+    # get_screening_log_stats_by_time()
 
 
 if __name__ == '__main__':
