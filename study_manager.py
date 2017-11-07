@@ -6,9 +6,11 @@ from research_study_manager import create_directories, create_excel_files, load_
 
 parser = argparse.ArgumentParser(prog='Research Study Manager',
                                  description='Command line interface to manage some common research tasks')
-parser.add_argument('-create_project', help='Creates a new project Projects Directory with the given name')
-parser.add_argument('-load_project', help='Loads Project that you wish to manage')
-parser.add_argument('-list_projects', default='Load Projects', help='List available projects to load')
+parser.add_argument('-create_project', metavar='Project_Name',
+                    help='Creates a new project titled Project_Name in the Projects directory')
+parser.add_argument('-load_project', metavar='Project_Name',
+                    help='Loads Project Project_Name from the Projects directory for study activities')
+parser.add_argument('-list_projects', action='store_true', help='List available projects to load')
 
 
 def main():
@@ -29,7 +31,7 @@ def main():
         print("You must supply a non empty string")
         sys.exit(1)
     # load specific project
-    if args.load_project is not None and args.load_project.strip():
+    if args.load_project is True:
         project_name = args.load_project.strip()
         project_path = os.path.join(project_directory, project_name)
         if os.path.exists(project_path) and os.path.isdir(project_path):
@@ -46,7 +48,7 @@ def main():
         print(os.listdir(project_directory))
         current_projects = {pid + 1: project
                             for pid, project in enumerate(os.listdir(project_directory))
-                            if os.path.isdir(project)
+                            if os.path.isdir(os.path.join(project_directory, project))
                             }
         print(current_projects)
         # Create dict of projects to
