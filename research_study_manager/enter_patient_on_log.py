@@ -3,7 +3,7 @@ import os
 import research_study_manager as rsm
 
 
-def enter_screened_patient(project_name: str, project_path: str):
+def enter_screened_patient(project_path: str, project_name: str):
     # Get Screening Log
     screening_log_path = os.path.join(project_path, 'logs', 'Screening_Log.xlsx')
 
@@ -23,7 +23,7 @@ def enter_screened_patient(project_name: str, project_path: str):
             print("Please enter Y or N")
 
 
-def enter_enrolled_patient(project_name: str, project_path: str):
+def enter_enrolled_patient(project_path: str, project_name: str):
     # Get Enrollment Log
     enrollment_log_path = os.path.join(project_path, 'logs', 'Enrollment_Log.xlsx')
 
@@ -43,7 +43,7 @@ def enter_enrolled_patient(project_name: str, project_path: str):
             print("Please enter Y or N")
 
 
-def enter_follow_up_patient(project_name: str, project_path: str):
+def enter_follow_up_patient(project_path: str, project_name: str):
     # Get Follow Up Log
     follow_up_log_path = os.path.join(project_path, 'logs', 'Follow_Up_Log.xlsx')
 
@@ -63,9 +63,9 @@ def enter_follow_up_patient(project_name: str, project_path: str):
             print("Please enter Y or N")
 
 
-def enter_linking_log_patient(project_name: str, project_path: str):
+def enter_linking_log_patient(project_path: str, project_name: str):
     # Get Linking Log
-    linking_log_path = os.path.join(project_path, 'logs', 'logs_with_phi', 'Follow_Up_Log.xlsx')
+    linking_log_path = os.path.join(project_path, 'logs', 'logs_with_phi', 'Master_Linking_Log.xlsx')
 
     while True:
         choice = input("Would you like to enter a new patient onto the Linking log log [Y/N]? ")

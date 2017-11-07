@@ -1,15 +1,39 @@
 import os
 import sys
 
-from research_study_manager.manage_project import manage_project
+import research_study_manager as rsm
 
 
-def load_project(BASE_DIR: str, project_name: str):
-    project_path = os.path.join(BASE_DIR, project_name)
+def load_project(project_path: str, project_name: str):
     if os.path.isdir(project_path):
         print("Opening {}".format(project_name))
-        manage_project(project_name, project_path)
+        manage_project(project_path, project_name)
 
     else:
         print("{} does not exist")
         sys.exit(1)
+
+
+def manage_project(project_path: str, project_name: str):
+    while True:
+        # Ask for what the user would like to do
+        print("1. Enter Patients on Screening Log")
+        print("2. Enter Patients on Enrollment Log")
+        print("3. Enter Patients on Follow Up Log")
+        print("4. Enter Patients on Master Linking Log")
+        choice = input("What actions would you like to take, q to quit ")
+
+        choices = {'1': rsm.enter_patient_on_log.enter_screened_patient,
+                   '2': rsm.enter_patient_on_log.enter_enrolled_patient,
+                   '3': rsm.enter_patient_on_log.enter_follow_up_patient,
+                   '4': rsm.enter_patient_on_log.enter_linking_log_patient,
+                   }
+
+        if choice is not None and choice.strip() and choices.get(choice) is not None:
+            choices[choice](project_path, project_name)
+
+        elif choice is not None and choice.strip() and choice.lower() == 'q':
+            break
+        # Bad Entry
+        else:
+            print("Please enter a valid choice")

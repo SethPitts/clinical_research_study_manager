@@ -3,6 +3,8 @@ from collections import namedtuple
 
 from research_study_manager import add_patient_to_excel_file, data_request_functions
 
+# TODO: Create test to make sure tuple fields match header fields in all areas of program
+
 ScreenedPatient = namedtuple("ScreenedPatient", ",".join(['ScreeningDate', 'ScreeningTime SubjectInitials',
                                                           'MedicalRecordNumber', 'Age', 'Sex', 'Eligible',
                                                           'ReasonIneligible', 'Enrolled',
@@ -66,7 +68,7 @@ def get_enrolled_patient_data() -> EnrolledPatient:
     patient_data['EnrollmentTime'] = data_request_functions.get_time_info('enrollment')
     patient_data['Age'] = data_request_functions.get_info_from_user('age')
     patient_data['Sex'] = data_request_functions.get_info_from_user('sex')
-    patient_data['Enrollment_Arm'] = data_request_functions.get_info_from_user('enrollment arm')
+    patient_data['EnrollmentArm'] = data_request_functions.get_info_from_user('enrollment arm')
     patient_data['ResearchAssistantInitials'] = data_request_functions.get_info_from_user(
         'research assistant initials')
 
