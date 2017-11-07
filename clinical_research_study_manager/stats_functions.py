@@ -21,7 +21,7 @@ def print_stats(stat_type: str, patient_dict: dict):
 
 def get_stats(log_path=None, log_sheet=None, log_type=None, data_frame=None):
     """
-    Gets basic statistics for a log or a filtered DataFram if given
+    Gets basic statistics for a log or a filtered DataFrame if given
     :param log_path: pathway to log to create stats from  (i.e. Screening, Enrollment)
     :param log_sheet: name of the sheet in the log that contains data (i.e. Screening_Loo, Enrollment_Log)
     :param log_type: type of log (i.e. Screening, Enrollment)
@@ -33,20 +33,23 @@ def get_stats(log_path=None, log_sheet=None, log_type=None, data_frame=None):
     else:
         df = data_frame
     # Total subjects
-    total_subjects_in_log = len(df)
-    print("You have screened {} patients in total ".format(total_subjects_in_log))
-    # Total by Sex
-    get_stat_type(df, 'Sex')
-    # Total by Age
-    get_stat_type(df, 'Age')
-    # Total Eligible
-    get_stat_type(df, 'Eligible')
-    # Reasons Ineligible
-    get_stat_type(df, 'Reason_Ineligible')
-    # Enrolled
-    get_stat_type(df, 'Enrolled')
-    # Reason Not Enrolled
-    get_stat_type(df, 'Reason_Not_Enrolled')
+    if len(df) > 0:
+        total_subjects_in_log = len(df)
+        print("You have screened {} patients in total ".format(total_subjects_in_log))
+        # Total by Sex
+        get_stat_type(df, 'Sex')
+        # Total by Age
+        get_stat_type(df, 'Age')
+        # Total Eligible
+        get_stat_type(df, 'Eligible')
+        # Reasons Ineligible
+        get_stat_type(df, 'Reason_Ineligible')
+        # Enrolled
+        get_stat_type(df, 'Enrolled')
+        # Reason Not Enrolled
+        get_stat_type(df, 'Reason_Not_Enrolled')
+    else:
+        print("No subjects in log for that date")
 
 
 def get_stat_type(df, stat_type):
@@ -85,6 +88,14 @@ def get_basic_stats_by_date(log_path, log_sheet, log_type, start_date, end_date)
 
 
 def get_stats_by_time(log_path, log_sheet, log_type):
+    """
+    Get basic stats from a log by filtered by morning(7am-12pm), afternoon(12pm-4pm), evening(4pm-11pm),
+    overnight(11pm-7am).
+    :param log_path: pathway to log
+    :param log_sheet: sheet in log where date is stored (i.e. Screening_Log)
+    :param log_type: type of log your are searching (i.e. screening or enrollment)
+    :return:
+    """
     df = create_dataframe_from_log(log_path, log_sheet, log_type)
     morning = time(7, 00)
     afternoon = time(12, 00)
@@ -142,10 +153,11 @@ def create_dataframe_from_log(log_path, log_sheet, log_type):
 
 def get_basic_plot(df, log_pathway, log_type):
     # See subjects enrolled by date
-    column_for_group = '{}Date'.format(log_type)
-    df_count = pd.DataFrame(df[column_for_group], columns=[column_for_group])
-    df_count = df_count.groupby(column_for_group)[column_for_group].count()
-    plot = df_count.plot(kind='bar')
-    fig = plot.get_figure()
-    data_viz_pathway = os.path.dirname(log_pathway).replace('logs', 'data_visualization')
-    fig.savefig(os.path.join(data_viz_pathway, '{}output.png'.format(log_type)))
+    if len(df) > 0:
+        column_for_group = '{}Date'.format(log_type)
+        df_count = pd.DataFrame(df[column_for_group], columns=[column_for_group])
+        df_count = df_count.groupby(column_for_group)[column_for_group].count()
+        plot = df_count.plot(kind='bar')
+        fig = plot.get_figure()
+        data_viz_pathway = os.path.dirname(log_pathway).replace('logs', 'data_visualization')
+        fig.savefig(os.path.join(data_viz_pathway, '{}output.png'.format(log_type)))

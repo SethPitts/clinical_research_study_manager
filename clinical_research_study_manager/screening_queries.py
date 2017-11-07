@@ -4,6 +4,7 @@ from clinical_research_study_manager import data_request_functions, stats_functi
 def get_screening_log_stats_by_date(screening_log_path: str):
     """
     Get basic stats from patients screened between two given dates
+    :param screening_log_path: pathway to log
     :return: df filtered on the requested dates
     """
     start_date = data_request_functions.get_date_info('Start')
@@ -18,6 +19,7 @@ def get_screening_log_basic_stats(screening_log_path: str):
     """
     Get basic stats from the screening log including total screened, total by sex, age ranges,
     total eligible and reasons not eligible, total enrolled and reasons not enrolled.
+    :param screening_log_path: pathway to log
     :return: No return
     """
     stats_functions.get_stats(log_path=screening_log_path, log_sheet='Screening_Log', log_type='Screening')
@@ -26,6 +28,7 @@ def get_screening_log_basic_stats(screening_log_path: str):
 def get_screening_log_stats_by_time(screening_log_path: str):
     """
     Get basic stats based on morning, afternoon, evening and night
+    :param screening_log_path: pathway to log
     :return: No Return
     """
     stats_functions.get_stats_by_time(screening_log_path, 'Screening_Log', 'Screening')
@@ -56,6 +59,7 @@ def choose_query(screening_log_path: str):
 
 def main():
     pass
+
 
 if __name__ == '__main__':
     main()

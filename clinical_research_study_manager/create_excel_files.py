@@ -87,12 +87,15 @@ def create_excel_file(project_path: str, project_name: str, file_name: str, head
     else:
         excel_file_path = os.path.join(project_path, 'logs', 'logs_with_phi', file_name)
 
-    new_work_book = openpyxl.Workbook()
-    work_sheet = new_work_book.active
-    work_sheet.title = file_name.replace('.xlsx', '')
-    work_sheet.append(headers)
-    new_work_book.save(os.path.join(excel_file_path))
-    print("Created {} log for {} at {}".format(file_name, project_name, excel_file_path))
+    if not os.path.exists(excel_file_path):
+        new_work_book = openpyxl.Workbook()
+        work_sheet = new_work_book.active
+        work_sheet.title = file_name.replace('.xlsx', '')
+        work_sheet.append(headers)
+        new_work_book.save(os.path.join(excel_file_path))
+        print("Created {} log for {} at {}".format(file_name, project_name, excel_file_path))
+    else:
+        print('file already exist at {}'.format(excel_file_path))
 
 
 def create_project_excel_files(project_path: str, project_name: str):

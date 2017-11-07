@@ -9,11 +9,12 @@ from clinical_research_study_manager.stats_functions import create_dataframe_fro
 def follow_up_by_custom_dates(follow_up_log_path):
     """
     Find follow ups between a two dates
+    :param follow_up_log_path: pathway to log
     :return: DataFrame filter on the two dates
     """
     start_date = get_date_info('Follow Up Start')
     end_date = get_date_info('Follow Up End')
-    follow_up_df = follow_ups_scheduled_between_dates(follow_up_log_path)
+    follow_up_df = follow_ups_scheduled_between_dates(follow_up_log_path, start_date=start_date, end_date=end_date)
     print("You have {} follow Ups scheduled between {} and {}".format(len(follow_up_df), start_date, end_date))
     print(follow_up_df.head())
     return follow_up_df
@@ -22,11 +23,12 @@ def follow_up_by_custom_dates(follow_up_log_path):
 def follow_ups_scheduled_for_today(follow_up_log_path):
     """
     Get Follow Ups Scheduled for Today
+    :param follow_up_log_path: pathway to log
     :return: DataFrame filtered on today
     """
     today = pd.to_datetime(datetime.date.today())
     type(today)
-    follow_up_df = follow_up_scheduled_on_date(today)
+    follow_up_df = follow_up_scheduled_on_date(follow_up_log_path, follow_up_date=today)
     print("You have {} follow ups scheduled for today".format(len(follow_up_df)))
     print(follow_up_df)
     return follow_up_df
@@ -45,13 +47,15 @@ def follow_ups_scheduled_for_this_week(follow_up_log_path):
     return follow_up_df
 
 
-def follow_up_scheduled_on_date(follow_up_log_path):
+def follow_up_scheduled_on_date(follow_up_log_path, follow_up_date=None):
     """
     Create follow up DataFrame filtered on a specific date
-    :param follow_up_date: date to filter the DataFrame on
+    :param follow_up_log_path: pathway to log
+    :param follow_up_date: date to filter DataFram on if given
     :return: Filtered DataFrame
     """
-    follow_up_date = get_date_info('Follow Up')
+    if follow_up_date is None:
+        follow_up_date = get_date_info('Follow Up')
     follow_up_df = create_dataframe_from_log(log_path=follow_up_log_path,
                                              log_sheet='Follow_Up_Log',
                                              log_type='FollowUp')
@@ -61,15 +65,17 @@ def follow_up_scheduled_on_date(follow_up_log_path):
     return today_df
 
 
-def follow_ups_scheduled_between_dates(follow_up_log_path):
+def follow_ups_scheduled_between_dates(follow_up_log_path, start_date=None, end_date=None):
     """
     Create Follow up DataFrame filtered between two dates
-    :param start_date: start date to filter on
-    :param end_date: end date to filter on
+    :param follow_up_log_path: pathway to log
+    :param start_date: start date if given
+    :param end_date: end date if given
     :return: Filtered DataFrame
     """
-    start_date = get_date_info('Start')
-    end_date = get_date_info('End')
+    if start_date is None and end_date is None:
+        start_date = get_date_info('Start')
+        end_date = get_date_info('End')
     follow_up_df = create_dataframe_from_log(log_path=follow_up_log_path,
                                              log_sheet='Follow_Up_Log',
                                              log_type='FollowUp')

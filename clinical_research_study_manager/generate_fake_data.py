@@ -3,6 +3,7 @@ import random
 from collections import OrderedDict
 
 from clinical_research_study_manager.add_patient_to_excel_file import add_patient
+from clinical_research_study_manager.study_manager import get_base_project_directory
 
 
 def get_int(x, y):
@@ -24,7 +25,7 @@ options['name'] = ['jane', 'doe', 'bob', 'marley']
 def get_options(options_dict=options):
     options_dict['date'] = ['{}/{}/{}'.format(get_int(1, 12),
                                               get_int(1, 28),
-                                              get_int(2012, 2016)
+                                              get_int(2016, 2018)
                                               )
                             ]
     options_dict['time'] = ['{}:{}'.format(get_int(0, 23),
@@ -102,15 +103,16 @@ def generate_patient_dict(data_headers: OrderedDict) -> OrderedDict:
 
 
 def main():
-    BASE_DIR = os.path.dirname(__file__)
+    BASE_DIR = get_base_project_directory()
+    BASE_DIR = os.path.join(BASE_DIR, 'Testing')
     screening_log_path = os.path.join(BASE_DIR, 'logs', 'Screening_Log.xlsx')
     enrollment_log_path = os.path.join(BASE_DIR, 'logs', 'Enrollment_Log.xlsx')
-    follow_up_log = os.path.join(BASE_DIR, 'logs', 'FollowUp_Log.xlsx')
+    follow_up_log = os.path.join(BASE_DIR, 'logs', 'Follow_Up_Log.xlsx')
     master_linking_log = os.path.join(BASE_DIR, 'logs', 'logs_with_phi', 'Master_Linking_Log.xlsx')
 
     data_files = [(screening_log_path, 'Screening_Log', get_screening_headers),
                   (enrollment_log_path, 'Enrollment_Log', get_enrollment_headers),
-                  (follow_up_log, 'FollowUp_Log', get_follow_up_headers),
+                  (follow_up_log, 'Follow_Up_Log', get_follow_up_headers),
                   (master_linking_log, 'Master_Linking_Log', get_linking_log_headers)
                   ]
     for data_file, data_sheet, data_func in data_files:
