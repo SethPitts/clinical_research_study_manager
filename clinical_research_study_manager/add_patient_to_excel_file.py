@@ -1,7 +1,7 @@
 import sys
 
 import openpyxl
-from research_study_manager.exceptions import HeaderException
+from clinical_research_study_manager.exceptions import HeaderException
 
 
 def add_patient(excel_file: str, patient_data: dict, sheet_name: str):

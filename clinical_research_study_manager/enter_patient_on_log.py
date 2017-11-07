@@ -1,9 +1,15 @@
 import os
 
-import research_study_manager as rsm
+import clinical_research_study_manager as rsm
 
 
 def enter_screened_patient(project_path: str, project_name: str):
+    """
+    Enter a patient on the screening log for the project
+    :param project_path: pathway to project
+    :param project_name: project name
+    :return:
+    """
     # Get Screening Log
     screening_log_path = os.path.join(project_path, 'logs', 'Screening_Log.xlsx')
 
@@ -24,6 +30,12 @@ def enter_screened_patient(project_path: str, project_name: str):
 
 
 def enter_enrolled_patient(project_path: str, project_name: str):
+    """
+    Enter patient onto enrollment log for project
+    :param project_path: pathway to project
+    :param project_name: project name
+    :return:
+    """
     # Get Enrollment Log
     enrollment_log_path = os.path.join(project_path, 'logs', 'Enrollment_Log.xlsx')
 
@@ -44,6 +56,12 @@ def enter_enrolled_patient(project_path: str, project_name: str):
 
 
 def enter_follow_up_patient(project_path: str, project_name: str):
+    """
+    Enter patient onto the follow up log for the project
+    :param project_path: pathway to project
+    :param project_name: project name
+    :return:
+    """
     # Get Follow Up Log
     follow_up_log_path = os.path.join(project_path, 'logs', 'Follow_Up_Log.xlsx')
 
@@ -64,6 +82,12 @@ def enter_follow_up_patient(project_path: str, project_name: str):
 
 
 def enter_linking_log_patient(project_path: str, project_name: str):
+    """
+    Enter patient onto the linking log for project
+    :param project_path: pathway to project
+    :param project_name: project name
+    :return:
+    """
     # Get Linking Log
     linking_log_path = os.path.join(project_path, 'logs', 'logs_with_phi', 'Master_Linking_Log.xlsx')
 

@@ -1,10 +1,16 @@
 import os
 import sys
 
-import research_study_manager as rsm
+import clinical_research_study_manager as rsm
 
 
 def load_project(project_path: str, project_name: str):
+    """
+    Load a project to be managed for study tasks
+    :param project_path: pathway to project
+    :param project_name: name of the project
+    :return:
+    """
     if os.path.isdir(project_path):
         print("Opening {}".format(project_name))
         manage_project(project_path, project_name)
@@ -15,6 +21,13 @@ def load_project(project_path: str, project_name: str):
 
 
 def manage_project(project_path: str, project_name: str):
+    """
+    Perform basic tasks for a given project including entering patients on screening log, enrollment log
+    follow up log, and master linking log.
+    :param project_path: pathway to project
+    :param project_name: naame of project
+    :return:
+    """
     while True:
         # Ask for what the user would like to do
         print("1. Enter Patients on Screening Log")

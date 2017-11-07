@@ -1,7 +1,7 @@
 import os
 from collections import namedtuple
 
-from research_study_manager import add_patient_to_excel_file, data_request_functions
+from clinical_research_study_manager import add_patient_to_excel_file, data_request_functions
 
 # TODO: Create test to make sure tuple fields match header fields in all areas of program
 
@@ -116,12 +116,6 @@ def main():
     screened_patient_data = get_screened_patient_data()
     add_patient_to_excel_file.add_patient(os.path.join('logs', 'Screening_Log.xlsx'), screened_patient_data,
                                           'Screening_Log')
-    # enrolled_patient_data = get_enrolled_patient_data()
-    # add_patient_to_excel_file.add_patient(os.path.join('logs','Enrollment_Log.xlsx'), enrolled_patient_data, 'Enrollment_Log')
-    # linked_patient_data = get_master_linking_log_data()
-    # add_patient_to_excel_file.add_patient(os.path.join('logs','logs_with_phi', 'Master_Linking_Log.xlsx'), linked_patient_data, 'Master_Linking_Log')
-    # follow_up_patient_data = get_follow_up_data()
-    # add_patient_to_excel_file.add_patient(os.path.join('logs','FollowUp_Log.xlsx'), follow_up_patient_data, 'FollowUp_Log')
 
 
 if __name__ == '__main__':

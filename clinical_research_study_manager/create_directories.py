@@ -3,6 +3,13 @@ import sys
 
 
 def make_directory(project_path, directory_to_create, project_name):
+    """
+    Create a directory for the project in the projects directory
+    :param project_path: pathway to project
+    :param directory_to_create: name of directory to create
+    :param project_name: project name
+    :return:
+    """
     directory_path = os.path.join(project_path, directory_to_create)
     try:
         if not os.path.exists(directory_path):
@@ -17,6 +24,12 @@ def make_directory(project_path, directory_to_create, project_name):
 
 
 def create_project_directories(project_path, project_name):
+    """
+    Create patient data and log directories for a project
+    :param project_path: pathway to project
+    :param project_name: project name
+    :return:
+    """
     # Create New Project Directory
     if not os.path.exists(project_path):
         os.mkdir(project_path)

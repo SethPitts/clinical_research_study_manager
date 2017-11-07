@@ -1,6 +1,6 @@
 import datetime
 
-from research_study_manager.exceptions import InputException
+from clinical_research_study_manager.exceptions import InputException
 
 
 def get_date_info(time_point: str):

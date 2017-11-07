@@ -2,7 +2,7 @@ import argparse
 import os
 import sys
 
-from research_study_manager import create_directories, create_excel_files, load_project
+from clinical_research_study_manager import create_directories, create_excel_files, load_project
 
 parser = argparse.ArgumentParser(prog='Research Study Manager',
                                  description='Command line interface to manage some common research tasks')
@@ -14,10 +14,16 @@ parser.add_argument('-list_projects', action='store_true', help='List available 
 
 
 def main():
-    print(__file__)
+    start()
+
+
+def start():
     BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+    # Create project directory if needed
     project_directory = os.path.join(BASE_DIR, 'Projects')
-    args = parser.parse_args(sys.argv[1:])
+    if not os.path.exists(project_directory):
+        os.mkdir(project_directory)
+    args = parser.parse_args()
     # Create new project
     if args.create_project is not None and args.create_project.strip():
         project_name = args.create_project.strip()
@@ -25,13 +31,13 @@ def main():
         print("Creating new project titled {}".format(project_name))
         create_directories.create_project_directories(project_path, project_name)
         print("Created log files for project {}".format(project_name))
-        create_excel_files.create_project_excel_files(project_name, project_path)
+        create_excel_files.create_project_excel_files(project_path, project_name)
     # Bad entry
     elif args.create_project is not None and not args.create_project.strip():
         print("You must supply a non empty string")
         sys.exit(1)
     # load specific project
-    if args.load_project is True:
+    if args.load_project is not None and args.load_project.strip():
         project_name = args.load_project.strip()
         project_path = os.path.join(project_directory, project_name)
         if os.path.exists(project_path) and os.path.isdir(project_path):
@@ -44,7 +50,7 @@ def main():
         print("You must supply a non empty string")
 
     # Load list of projects for user to choose from
-    if args.list_projects is not None and args.list_projects.strip():
+    if args.list_projects is True:
         print(os.listdir(project_directory))
         current_projects = {pid + 1: project
                             for pid, project in enumerate(os.listdir(project_directory))

@@ -2,8 +2,8 @@ import datetime
 import os
 
 import pandas as pd
-from research_study_manager.data_request_functions import get_date_info
-from research_study_manager.stats_functions import create_dataframe_from_log
+from clinical_research_study_manager.data_request_functions import get_date_info
+from clinical_research_study_manager.stats_functions import create_dataframe_from_log
 
 BASE_DIR = os.path.dirname(__file__)
 
@@ -11,6 +11,10 @@ follow_up_log_path = os.path.join(BASE_DIR, 'logs', 'Follow_Up_Log.xlsx')
 
 
 def follow_up_by_custom_dates():
+    """
+    Find follow ups between a two dates
+    :return: DataFrame filter on the two dates
+    """
     start_date = get_date_info('Follow Up Start')
     end_date = get_date_info('Follow Up End')
     follow_up_df = follow_ups_scheduled_between_dates(start_date, end_date)

@@ -2,7 +2,7 @@ import os
 import random
 from collections import OrderedDict
 
-from research_study_manager.add_patient_to_excel_file import add_patient
+from clinical_research_study_manager.add_patient_to_excel_file import add_patient
 
 
 def get_int(x, y):
