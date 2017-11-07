@@ -1,7 +1,8 @@
-from setuptools import setup, find_packages
 # To use a consistent encoding
 from codecs import open
 from os import path
+
+from setuptools import setup, find_packages
 
 here = path.abspath(path.dirname(__file__))
 
@@ -39,8 +40,8 @@ setup(
         'Development Status :: 3 - Alpha',
 
         # Indicate who your project is intended for
-        'Intended Audience :: Researchers',
-        'Topic :: Clinical Research',
+        'Intended Audience :: Developers',
+        'Topic :: Software Development',
 
         # Pick your license as you wish (should match "license" above)
         'License :: OSI Approved :: MIT License',
