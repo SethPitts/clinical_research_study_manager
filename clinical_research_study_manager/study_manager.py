@@ -17,12 +17,35 @@ def main():
     start()
 
 
+def get_base_project_directory():
+    """
+    Creates the default project directories if needed and returns them
+    :return: base directory where projects will be stored
+    """
+    if sys.platform in ('linux', 'darwin'):
+        base_program_dir = os.path.join(os.environ['HOME'], 'Clinical_Research_Manager_Projects')
+        base_project_dir = os.path.join(base_program_dir, 'Projects')
+        if not os.path.exists(base_program_dir):
+            os.mkdir(base_program_dir)
+        if not os.path.exists(base_project_dir):
+            os.mkdir(base_project_dir)
+        return base_project_dir
+
+    if sys.platform == 'win32':
+        base_program_dir = os.path.join(os.environ['USERPROFILE'], 'Clinical_Research_Manager_Projects')
+        base_project_dir = os.path.join(base_program_dir, 'Projects')
+        if not os.path.exists(base_program_dir):
+            os.mkdir(base_program_dir)
+        if not os.path.exists(base_project_dir):
+            os.mkdir(base_project_dir)
+        return base_project_dir
+
+    print("Can not determine system type")
+    sys.exit(1)
+
+
 def start():
-    BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-    # Create project directory if needed
-    project_directory = os.path.join(BASE_DIR, 'Projects')
-    if not os.path.exists(project_directory):
-        os.mkdir(project_directory)
+    project_directory = get_base_project_directory()
     args = parser.parse_args()
     # Create new project
     if args.create_project is not None and args.create_project.strip():
