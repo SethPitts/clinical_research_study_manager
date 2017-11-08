@@ -41,7 +41,9 @@ def follow_ups_scheduled_for_this_week(follow_up_log_path):
     """
     start_of_week = pd.to_datetime(datetime.date.today())
     end_of_week = pd.to_datetime(datetime.date.today() + datetime.timedelta(7))
-    follow_up_df = follow_ups_scheduled_between_dates(follow_up_log_path)
+    follow_up_df = follow_ups_scheduled_between_dates(follow_up_log_path,
+                                                      start_date=start_of_week,
+                                                      end_date=end_of_week)
     print("You have {} follow ups scheduled for this week".format(len(follow_up_df)))
     print(follow_up_df.head())
     return follow_up_df
@@ -51,7 +53,7 @@ def follow_up_scheduled_on_date(follow_up_log_path, follow_up_date=None):
     """
     Create follow up DataFrame filtered on a specific date
     :param follow_up_log_path: pathway to log
-    :param follow_up_date: date to filter DataFram on if given
+    :param follow_up_date: date to filter DataFrame on if given
     :return: Filtered DataFrame
     """
     if follow_up_date is None:
@@ -102,16 +104,21 @@ def patients_at_risk_of_being_lost(follow_up_log_path):
 
 
 def choose_query(follow_up_log_path: str):
+    """
+    Method to manage query options for a follow up log
+    :param follow_up_log_path:
+    :return: No Return
+    """
     while True:
         # Ask for what the user would like to do
-        print("1. Follow Ups Today)")
+        print("1. Follow Ups Today")
         print("2. Follow Ups This Week")
         print("3. Follow Ups on a specific Date")
         print("4. Follow Ups Between two Dates")
         print("5. Patients at Risk of being lost to follow up")
         choice = input("What actions would you like to take, q to quit ")
 
-        choices = {'1': follow_ups_scheduled_between_dates,
+        choices = {'1': follow_ups_scheduled_for_today,
                    '2': follow_ups_scheduled_for_this_week,
                    '3': follow_up_scheduled_on_date,
                    '4': follow_ups_scheduled_between_dates,
@@ -127,8 +134,10 @@ def choose_query(follow_up_log_path: str):
         else:
             print("Please enter a valid choice")
 
+
 def main():
     pass
+
 
 if __name__ == '__main__':
     main()
