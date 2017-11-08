@@ -58,10 +58,11 @@ def follow_up_scheduled_on_date(follow_up_log_path, follow_up_date=None):
     """
     if follow_up_date is None:
         follow_up_date = get_date_info('Follow Up')
+        print(follow_up_date, type(follow_up_date))
     follow_up_df = create_dataframe_from_log(log_path=follow_up_log_path,
                                              log_sheet='Follow_Up_Log',
                                              log_type='FollowUp')
-    today_df = follow_up_df.loc[(follow_up_df.FollowUpDate == follow_up_date)]
+    today_df = follow_up_df.loc[(follow_up_df.FollowUpDate == pd.to_datetime(follow_up_date))]
     print("You have {} follow up scheduled on {}".format(len(today_df), follow_up_date))
     print(today_df.head())
     return today_df
@@ -81,7 +82,8 @@ def follow_ups_scheduled_between_dates(follow_up_log_path, start_date=None, end_
     follow_up_df = create_dataframe_from_log(log_path=follow_up_log_path,
                                              log_sheet='Follow_Up_Log',
                                              log_type='FollowUp')
-    week_df = follow_up_df.loc[(follow_up_df.FollowUpDate >= start_date) & (follow_up_df.FollowUpDate <= end_date)]
+    week_df = follow_up_df.loc[(follow_up_df.FollowUpDate >= pd.to_datetime(start_date))
+                               & (follow_up_df.FollowUpDate <= pd.to_datetime(end_date))]
     print("You have {} follow ups scheduled between {} and {}".format(len(week_df), start_date, end_date))
     print(week_df.head())
     return week_df
@@ -89,7 +91,7 @@ def follow_ups_scheduled_between_dates(follow_up_log_path, start_date=None, end_
 
 def patients_at_risk_of_being_lost(follow_up_log_path):
     """
-    Create Follow up data frame for at risk subjects
+    Create Follow up data frame for at risk subjects5
     :return: DataFrame containing subjects at risks of being lost to follow up
     """
     today = pd.to_datetime(datetime.date.today())

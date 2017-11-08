@@ -45,7 +45,7 @@ class TestUserInput(TestCase):
 
 
 # TODO: Figure out how to test bad input since we are using a while loop for that. Is that a bad idea?
-
+# TODO: Figure out how to call test using setup.py
 
 def main():
     unittest.main()
