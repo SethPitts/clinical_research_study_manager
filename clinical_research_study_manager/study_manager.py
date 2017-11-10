@@ -79,7 +79,6 @@ def start():
                             for pid, project in enumerate(os.listdir(project_directory))
                             if os.path.isdir(os.path.join(project_directory, project))
                             }
-        print(current_projects)
         # Create dict of projects to
         if current_projects:
             while True:
