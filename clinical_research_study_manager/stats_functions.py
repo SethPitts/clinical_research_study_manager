@@ -159,8 +159,10 @@ def get_basic_plot(df, log_pathway, log_type):
     if len(df) > 0:
         column_for_group = '{}Date'.format(log_type)
         df_count = pd.DataFrame(df[column_for_group], columns=[column_for_group])
-        df_count = df_count.groupby(column_for_group)[column_for_group].count()
-        plot = df_count.plot(figsize=(15, 15), kind='bar')
+        df_count.set_index(column_for_group, drop=False)
+        df_count = df_count.groupby(column_for_group)[column_for_group].aggregate('count')
+        print(df_count)
+        plot = df_count.plot(kind='bar')
         fig = plot.get_figure()
         data_viz_pathway = os.path.dirname(log_pathway).replace('logs', 'data_visualization')
         figure_pathway = os.path.join(data_viz_pathway, '{}output.png'.format(log_type))
@@ -168,30 +170,8 @@ def get_basic_plot(df, log_pathway, log_type):
         print('Basic {} log info bar chart saved to {}'.format(log_type, figure_pathway))
 
 
-def test_plotting():
-    import pandas as pd
-    import openpyxl
-    import matplotlib as plt
-    plt.rcParams['figure.figsize'] = (15, 15)
-    screening_log_path = r'/home/beliefs22/Clinical_Research_Manager_Projects/Projects/Testing/logs/Screening_Log.xlsx'
-    work_book = openpyxl.load_workbook(screening_log_path)
-    work_sheet = work_book['Screening_Log']
-    data = work_sheet.values
-    col_names = next(data)  # Get Headers as column name
-    log_data = list(data)
-    row_ids = [row[0] for row in log_data]  # Get count of subjects in file as row_id
-    log_data = (islice(row, 0, None) for row in log_data)
-    df = pd.DataFrame(log_data, index=row_ids, columns=col_names)
-    df_date = df[['ScreeningDate']].apply(pd.to_datetime, format='%m/%d/%Y')
-    df_date.set_index(['ScreeningDate'], inplace=False)
-    print(df_date.head())
-    plot = df_date.ScreeningDate.value_counts().plot(kind='bar')
-    fig = plot.get_figure()
-    fig.savefig('testingoutput.png')
-
-
 def main():
-    test_plotting()
+    pass
 
 
 if __name__ == '__main__':
