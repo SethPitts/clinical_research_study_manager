@@ -155,19 +155,42 @@ def create_dataframe_from_log(log_path, log_sheet, log_type):
 
 
 def get_basic_plot(df, log_pathway, log_type):
-    # See subjects enrolled by date
     if len(df) > 0:
-        column_for_group = '{}Date'.format(log_type)
-        df_count = pd.DataFrame(df[column_for_group], columns=[column_for_group])
-        df_count.set_index(column_for_group, drop=False)
-        df_count = df_count.groupby(column_for_group)[column_for_group].aggregate('count')
-        print(df_count)
-        plot = df_count.plot(kind='bar')
-        fig = plot.get_figure()
+        # Get the date column we will use for various counts
+        column_for_grouping = '{}Date'.format(log_type)
+        # Add a date index to df
+        df.set_index(df[column_for_grouping].apply(pd.to_datetime), inplace=True, drop=False)
+        # Add Month, week and weekday columns
+        df['Month'] = df.index.month
+        df['Week'] = df.index.week  # Should we use week of year here?
+        df['WeekDay'] = df.index.weekday_name
+        # Create groups for plotting
+        month = df.groupby('Month').size()
+        month.index = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+        week = df.groupby('Week').size()
+        weekday = df.groupby('WeekDay').size()
+        # Plot groups
+        # Month
         data_viz_pathway = os.path.dirname(log_pathway).replace('logs', 'data_visualization')
-        figure_pathway = os.path.join(data_viz_pathway, '{}output.png'.format(log_type))
-        fig.savefig(figure_pathway)
-        print('Basic {} log info bar chart saved to {}'.format(log_type, figure_pathway))
+        month_plot = month.plot(kind='bar')
+        month_fig = month_plot.get_figure()
+        month_figure_pathway = os.path.join(data_viz_pathway, '{}output_month.png'.format(log_type))
+        month_fig.savefig(month_figure_pathway)
+        print('Basic {} log by month chart saved to {}'.format(log_type, month_figure_pathway))
+
+        # Week
+        week_plot = week.plot(kind='bar')
+        week_fig = week_plot.get_figure()
+        week_figure_pathway = os.path.join(data_viz_pathway, '{}output_week.png'.format(log_type))
+        week_fig.savefig(week_figure_pathway)
+        print('Basic {} log by month chart saved to {}'.format(log_type, week_figure_pathway))
+
+        # Weekday
+        weekday_plot = weekday.plot(kind='bar')
+        weekday_fig = weekday_plot.get_figure()
+        weekday_figure_pathway = os.path.join(data_viz_pathway, '{}output_weekday.png'.format(log_type))
+        weekday_fig.savefig(weekday_figure_pathway)
+        print('Basic {} log by month chart saved to {}'.format(log_type, weekday_figure_pathway))
 
 
 def main():
