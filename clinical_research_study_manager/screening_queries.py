@@ -35,6 +35,11 @@ def get_screening_log_stats_by_time(screening_log_path: str):
 
 
 def choose_query(screening_log_path: str):
+    """
+    Available queries for the screening log for a project
+    :param screening_log_path: Pathway to Screening Log
+    :return:
+    """
     while True:
         # Ask for what the user would like to do
         print("1. Basic Screening Log Stats")

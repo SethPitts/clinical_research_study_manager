@@ -44,6 +44,12 @@ def manage_project(project_path: str, project_name: str):
 
 
 def manage_logs(project_path: str, project_name: str):
+    """
+    Options for managing logs for a given project
+    :param project_path: Pathway to project
+    :param project_name: Project Name
+    :return:
+    """
     while True:
         # Ask for what the user would like to do
         print("1. Enter Patients on Screening Log")
@@ -69,6 +75,12 @@ def manage_logs(project_path: str, project_name: str):
 
 
 def manage_queries(project_path: str, project_name: str):
+    """
+    Query options for Screening, Enrollment, and Follow Up logs in a given project
+    :param project_path: Pathway to project
+    :param project_name: Project Name
+    :return:
+    """
     project_log_path = os.path.join(project_path, 'logs')
     while True:
         # Ask for what the user would like to do

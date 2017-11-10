@@ -1,6 +1,6 @@
 # Clinical Research Study Manager
 
-Program to manage some common clinical research task from the command line
+Program to manage some common clinical research task from the command line. This is very much a work in progress.
 
 ## Getting Started
 

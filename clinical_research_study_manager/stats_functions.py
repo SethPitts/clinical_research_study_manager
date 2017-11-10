@@ -132,11 +132,20 @@ def create_dataframe_from_log(log_path, log_sheet, log_type):
     :param log_type: type of log (i.e. Screening, Enrollment)
     :return:
     """
+    print("Created DataFrame using {} log with sheet {} located at {}".format(log_type, log_sheet, log_path))
     df = pd.read_excel(log_path)
     return df
 
 
 def get_basic_plot(df, log_pathway, log_type):
+    """
+    Created basic bar graph plots for a log filtered on Months, Weeks, and WeekDays and saves them in
+    projects Data_Visualization directory
+    :param df: DataFrame to plot
+    :param log_pathway: Pathway to log DataFrame was created from
+    :param log_type: Type of Log (i.e. Screening, Enrollment, Follow Up
+    :return:
+    """
     if len(df) > 0:
         # Get the date column we will use for various counts
         column_for_grouping = '{}Date'.format(log_type)
@@ -151,7 +160,7 @@ def get_basic_plot(df, log_pathway, log_type):
         # month.index = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
         week = df.groupby('Week').size()
         weekday = df.groupby('WeekDay').size()
-        # Plot groups
+
         # Month
         data_viz_pathway = os.path.dirname(log_pathway).replace('logs', 'data_visualization')
         month_plot = month.plot(kind='bar')

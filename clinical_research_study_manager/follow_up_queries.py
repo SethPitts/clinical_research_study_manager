@@ -107,8 +107,8 @@ def patients_at_risk_of_being_lost(follow_up_log_path):
 
 def choose_query(follow_up_log_path: str):
     """
-    Method to manage query options for a follow up log
-    :param follow_up_log_path:
+    Avaialble queries for a Follow Up log for a project
+    :param follow_up_log_path: Pathway to log
     :return: No Return
     """
     while True:
