@@ -27,7 +27,7 @@ def get_enrollment_log_stats_by_time(enrollment_log_path: str):
 def choose_query(enrollment_log_path: str):
     while True:
         # Ask for what the user would like to do
-        print("1. Basic Enrollment Log Stats)")
+        print("1. Basic Enrollment Log Stats")
         print("2. Get basic Enrollment stats between two dates")
         print("3. Get basic Enrollment stats by time of day")
         choice = input("What actions would you like to take, q to quit ")

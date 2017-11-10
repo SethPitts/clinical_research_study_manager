@@ -166,7 +166,7 @@ def get_basic_plot(df, log_pathway, log_type):
         df['WeekDay'] = df.index.weekday_name
         # Create groups for plotting
         month = df.groupby('Month').size()
-        month.index = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+        # month.index = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
         week = df.groupby('Week').size()
         weekday = df.groupby('WeekDay').size()
         # Plot groups
