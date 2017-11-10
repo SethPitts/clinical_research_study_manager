@@ -1,9 +1,7 @@
 import os
 from datetime import time
-from itertools import islice
 
 import matplotlib as plt
-import openpyxl
 import pandas as pd
 
 plt.rcParams['figure.figsize'] = (15, 15)
@@ -85,6 +83,7 @@ def get_basic_stats_by_date(log_path, log_sheet, log_type, start_date, end_date)
     end_date = pd.to_datetime(end_date)
     log_date = '{}Date'.format(log_type)
     df = create_dataframe_from_log(log_path, log_sheet, log_type)
+    df[log_date] = df[log_date].apply(pd.to_datetime)
     df = df.loc[(df[log_date] >= start_date) & (df[log_date] <= end_date)]
     get_stats(data_frame=df)
     return df
@@ -100,11 +99,12 @@ def get_stats_by_time(log_path, log_sheet, log_type):
     :return:
     """
     df = create_dataframe_from_log(log_path, log_sheet, log_type)
-    morning = time(7, 00)
-    afternoon = time(12, 00)
-    evening = time(16, 00)
-    night = time(23, 00)
+    morning = pd.to_datetime(str(time(7, 00).strftime('%H:%M')), format='%H:%M')
+    afternoon = pd.to_datetime(str(time(12, 00).strftime('%H:%M')), format='%H:%M')
+    evening = pd.to_datetime(str(time(16, 00).strftime('%H:%M')), format='%H:%M')
+    night = pd.to_datetime(str(time(23, 00).strftime('%H:%M')), format='%H:%M')
     log_time = '{}Time'.format(log_type)
+    df[log_time] = df[log_time].apply(pd.to_datetime, format='%H:%M')
     df_morning = df.loc[(df[log_time] >= morning) & (df[log_time] < afternoon)]
     df_afternoon = df.loc[(df[log_time] >= afternoon) & (df[log_time] < evening)]
     df_evening = df.loc[(df[log_time] >= evening) & (df[log_time] < night)]
@@ -132,25 +132,7 @@ def create_dataframe_from_log(log_path, log_sheet, log_type):
     :param log_type: type of log (i.e. Screening, Enrollment)
     :return:
     """
-    work_book = openpyxl.load_workbook(log_path)
-    work_sheet = work_book[log_sheet]
-    data = work_sheet.values
-    col_names = next(data)  # Get Headers as column name
-    log_data = list(data)
-    row_ids = [i for i, _ in enumerate(log_data)]  # Get count of subjects in file as row_id
-    log_data = (islice(row, 0, None) for row in log_data)
-    df = pd.DataFrame(log_data, index=row_ids, columns=col_names)
-    log_date = '{}Date'.format(log_type)
-    log_time = '{}Time'.format(log_type)
-    # Convert Date Columns
-    if df.get(log_date) is not None:
-        df[log_date] = df[log_date].apply(pd.to_datetime)
-    # Convert Time Columns
-    if df.get(log_time) is not None:
-        df[log_time] = df[log_time].apply(lambda x: time(*[int(item) for item in x.split(":")]))
-    # Convert Age to int
-    if df.get('Age') is not None:
-        df['Age'] = df['Age'].apply(pd.to_numeric)
+    df = pd.read_excel(log_path)
     return df
 
 
