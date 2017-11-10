@@ -1,7 +1,9 @@
 import os
 from datetime import time
+from itertools import islice
 
 import matplotlib as plt
+import openpyxl
 import pandas as pd
 
 plt.rcParams['figure.figsize'] = (15, 15)
@@ -130,7 +132,25 @@ def create_dataframe_from_log(log_path, log_sheet, log_type):
     :param log_type: type of log (i.e. Screening, Enrollment)
     :return:
     """
-    df = pd.read_excel(log_path)
+    work_book = openpyxl.load_workbook(log_path)
+    work_sheet = work_book[log_sheet]
+    data = work_sheet.values
+    col_names = next(data)  # Get Headers as column name
+    log_data = list(data)
+    row_ids = [i for i, _ in enumerate(log_data)]  # Get count of subjects in file as row_id
+    log_data = (islice(row, 0, None) for row in log_data)
+    df = pd.DataFrame(log_data, index=row_ids, columns=col_names)
+    log_date = '{}Date'.format(log_type)
+    log_time = '{}Time'.format(log_type)
+    # Convert Date Columns
+    if df.get(log_date) is not None:
+        df[log_date] = df[log_date].apply(pd.to_datetime)
+    # Convert Time Columns
+    if df.get(log_time) is not None:
+        df[log_time] = df[log_time].apply(lambda x: time(*[int(item) for item in x.split(":")]))
+    # Convert Age to int
+    if df.get('Age') is not None:
+        df['Age'] = df['Age'].apply(pd.to_numeric)
     return df
 
 
@@ -146,46 +166,7 @@ def get_basic_plot(df, log_pathway, log_type):
         df['WeekDay'] = df.index.weekday_name
         # Create groups for plotting
         month = df.groupby('Month').size()
-        month.index = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
-        week = df.groupby('Week').size()
-        weekday = df.groupby('WeekDay').size()
-        # Plot groups
-        # Month
-        data_viz_pathway = os.path.dirname(log_pathway).replace('logs', 'data_visualization')
-        month_plot = month.plot(kind='bar')
-        month_fig = month_plot.get_figure()
-        month_figure_pathway = os.path.join(data_viz_pathway, '{}output_month.png'.format(log_type))
-        month_fig.savefig(month_figure_pathway)
-        print('Basic {} log by month chart saved to {}'.format(log_type, month_figure_pathway))
-
-        # Week
-        week_plot = week.plot(kind='bar')
-        week_fig = week_plot.get_figure()
-        week_figure_pathway = os.path.join(data_viz_pathway, '{}output_week.png'.format(log_type))
-        week_fig.savefig(week_figure_pathway)
-        print('Basic {} log by month chart saved to {}'.format(log_type, week_figure_pathway))
-
-        # Weekday
-        weekday_plot = weekday.plot(kind='bar')
-        weekday_fig = weekday_plot.get_figure()
-        weekday_figure_pathway = os.path.join(data_viz_pathway, '{}output_weekday.png'.format(log_type))
-        weekday_fig.savefig(weekday_figure_pathway)
-        print('Basic {} log by month chart saved to {}'.format(log_type, weekday_figure_pathway))
-
-
-def create_basic_plots(df, log_pathway, log_type):
-    if len(df) > 0:
-        # Get the date column we will use for various counts
-        column_for_grouping = '{}Date'.format(log_type)
-        # Add a date index to df
-        df.set_index(df[column_for_grouping].apply(pd.to_datetime), inplace=True, drop=False)
-        # Add Month, week and weekday columns
-        df['Month'] = df.index.month
-        df['Week'] = df.index.week  # Should we use week of year here?
-        df['WeekDay'] = df.index.weekday_name
-        # Create groups for plotting
-        month = df.groupby('Month').size()
-        month.index = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+        # month.index = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
         week = df.groupby('Week').size()
         weekday = df.groupby('WeekDay').size()
         # Plot groups
@@ -213,9 +194,7 @@ def create_basic_plots(df, log_pathway, log_type):
 
 
 def main():
-    screening_log_path = r'/home/beliefs22/Clinical_Research_Manager_Projects/Projects/Testing/logs/Screening_Log.xlsx'
-    df = create_dataframe_from_log(screening_log_path, 'Screening_Log', 'Screening')
-    create_basic_plots(df, screening_log_path, 'Screening')
+    pass
 
 
 if __name__ == '__main__':
