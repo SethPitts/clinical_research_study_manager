@@ -1,9 +1,10 @@
 import os
 from datetime import time
-from itertools import islice
 
-import openpyxl
+import matplotlib as plt
 import pandas as pd
+
+plt.rcParams['figure.figsize'] = (15, 15)
 
 
 def print_stats(stat_type: str, patient_dict: dict):
@@ -129,35 +130,93 @@ def create_dataframe_from_log(log_path, log_sheet, log_type):
     :param log_type: type of log (i.e. Screening, Enrollment)
     :return:
     """
-    work_book = openpyxl.load_workbook(log_path)
-    work_sheet = work_book[log_sheet]
-    data = work_sheet.values
-    col_names = next(data)  # Get Headers as column name
-    log_data = list(data)
-    row_ids = [i for i, _ in enumerate(log_data)]  # Get count of subjects in file as row_id
-    log_data = (islice(row, 0, None) for row in log_data)
-    df = pd.DataFrame(log_data, index=row_ids, columns=col_names)
-    log_date = '{}Date'.format(log_type)
-    log_time = '{}Time'.format(log_type)
-    # Convert Date Columns
-    if df.get(log_date) is not None:
-        df[log_date] = df[log_date].apply(pd.to_datetime)
-    # Convert Time Columns
-    if df.get(log_time) is not None:
-        df[log_time] = df[log_time].apply(lambda x: time(*[int(item) for item in x.split(":")]))
-    # Convert Age to int
-    if df.get('Age') is not None:
-        df['Age'] = df['Age'].apply(pd.to_numeric)
+    df = pd.read_excel(log_path)
     return df
 
 
 def get_basic_plot(df, log_pathway, log_type):
-    # See subjects enrolled by date
     if len(df) > 0:
-        column_for_group = '{}Date'.format(log_type)
-        df_count = pd.DataFrame(df[column_for_group], columns=[column_for_group])
-        df_count = df_count.groupby(column_for_group)[column_for_group].count()
-        plot = df_count.plot(kind='bar')
-        fig = plot.get_figure()
+        # Get the date column we will use for various counts
+        column_for_grouping = '{}Date'.format(log_type)
+        # Add a date index to df
+        df.set_index(df[column_for_grouping].apply(pd.to_datetime), inplace=True, drop=False)
+        # Add Month, week and weekday columns
+        df['Month'] = df.index.month
+        df['Week'] = df.index.week  # Should we use week of year here?
+        df['WeekDay'] = df.index.weekday_name
+        # Create groups for plotting
+        month = df.groupby('Month').size()
+        month.index = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+        week = df.groupby('Week').size()
+        weekday = df.groupby('WeekDay').size()
+        # Plot groups
+        # Month
         data_viz_pathway = os.path.dirname(log_pathway).replace('logs', 'data_visualization')
-        fig.savefig(os.path.join(data_viz_pathway, '{}output.png'.format(log_type)))
+        month_plot = month.plot(kind='bar')
+        month_fig = month_plot.get_figure()
+        month_figure_pathway = os.path.join(data_viz_pathway, '{}output_month.png'.format(log_type))
+        month_fig.savefig(month_figure_pathway)
+        print('Basic {} log by month chart saved to {}'.format(log_type, month_figure_pathway))
+
+        # Week
+        week_plot = week.plot(kind='bar')
+        week_fig = week_plot.get_figure()
+        week_figure_pathway = os.path.join(data_viz_pathway, '{}output_week.png'.format(log_type))
+        week_fig.savefig(week_figure_pathway)
+        print('Basic {} log by month chart saved to {}'.format(log_type, week_figure_pathway))
+
+        # Weekday
+        weekday_plot = weekday.plot(kind='bar')
+        weekday_fig = weekday_plot.get_figure()
+        weekday_figure_pathway = os.path.join(data_viz_pathway, '{}output_weekday.png'.format(log_type))
+        weekday_fig.savefig(weekday_figure_pathway)
+        print('Basic {} log by month chart saved to {}'.format(log_type, weekday_figure_pathway))
+
+
+def create_basic_plots(df, log_pathway, log_type):
+    if len(df) > 0:
+        # Get the date column we will use for various counts
+        column_for_grouping = '{}Date'.format(log_type)
+        # Add a date index to df
+        df.set_index(df[column_for_grouping].apply(pd.to_datetime), inplace=True, drop=False)
+        # Add Month, week and weekday columns
+        df['Month'] = df.index.month
+        df['Week'] = df.index.week  # Should we use week of year here?
+        df['WeekDay'] = df.index.weekday_name
+        # Create groups for plotting
+        month = df.groupby('Month').size()
+        month.index = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+        week = df.groupby('Week').size()
+        weekday = df.groupby('WeekDay').size()
+        # Plot groups
+        # Month
+        data_viz_pathway = os.path.dirname(log_pathway).replace('logs', 'data_visualization')
+        month_plot = month.plot(kind='bar')
+        month_fig = month_plot.get_figure()
+        month_figure_pathway = os.path.join(data_viz_pathway, '{}output_month.png'.format(log_type))
+        month_fig.savefig(month_figure_pathway)
+        print('Basic {} log by month chart saved to {}'.format(log_type, month_figure_pathway))
+
+        # Week
+        week_plot = week.plot(kind='bar')
+        week_fig = week_plot.get_figure()
+        week_figure_pathway = os.path.join(data_viz_pathway, '{}output_week.png'.format(log_type))
+        week_fig.savefig(week_figure_pathway)
+        print('Basic {} log by month chart saved to {}'.format(log_type, week_figure_pathway))
+
+        # Weekday
+        weekday_plot = weekday.plot(kind='bar')
+        weekday_fig = weekday_plot.get_figure()
+        weekday_figure_pathway = os.path.join(data_viz_pathway, '{}output_weekday.png'.format(log_type))
+        weekday_fig.savefig(weekday_figure_pathway)
+        print('Basic {} log by month chart saved to {}'.format(log_type, weekday_figure_pathway))
+
+
+def main():
+    screening_log_path = r'/home/beliefs22/Clinical_Research_Manager_Projects/Projects/Testing/logs/Screening_Log.xlsx'
+    df = create_dataframe_from_log(screening_log_path, 'Screening_Log', 'Screening')
+    create_basic_plots(df, screening_log_path, 'Screening')
+
+
+if __name__ == '__main__':
+    main()
