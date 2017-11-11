@@ -4,7 +4,8 @@ Program to manage some common clinical research task from the command line. This
 
 ## Getting Started
 
-This program requires python 3 and a few external packages.
+This program requires python 3 and a few external packages. Strongly advise installing into a virtual environment as I'm
+new at this!
 
 ### Prerequisites
 

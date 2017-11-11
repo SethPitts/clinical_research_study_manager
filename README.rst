@@ -1,13 +1,14 @@
 Clinical Research Study Manager
 ===============================
 
-Program to manage some common clinical research task from the command
+Program to manage some common clinical research task from the command. Very much a work in progress
 line
 
 Getting Started
 ---------------
 
-This program requires python 3 and a few external packages.
+This program requires python 3 and a few external packages. Strongly advise installing into a virtual environment as I'm
+new at this!
 
 Prerequisites
 ~~~~~~~~~~~~~
