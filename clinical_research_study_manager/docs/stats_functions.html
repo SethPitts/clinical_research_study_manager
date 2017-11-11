@@ -1,0 +1,130 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head><title>Python: module stats_functions</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+</head>
+<body bgcolor="#f0f0f8">
+
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="heading">
+    <tr bgcolor="#7799ee">
+        <td valign=bottom>&nbsp;<br>
+            <font color="#ffffff"
+                  face="helvetica, arial">&nbsp;<br><big><big><strong>stats_functions</strong></big></big></font></td
+        >
+        <td align=right valign=bottom
+        ><font color="#ffffff" face="helvetica, arial"><a href="../../">index</a><br><a
+                href="file:/home/beliefs22/PycharmProjects/clinical_research_study_manager/clinical_research_study_manager/stats_functions.py">/home/beliefs22/PycharmProjects/clinical_research_study_manager/clinical_research_study_manager/stats_functions.py</a></font>
+        </td>
+    </tr>
+</table>
+<p></p>
+<p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+    <tr bgcolor="#aa55cc">
+        <td colspan=3 valign=bottom>&nbsp;<br>
+            <font color="#ffffff" face="helvetica, arial"><big><strong>Modules</strong></big></font></td>
+    </tr>
+
+    <tr>
+        <td bgcolor="#aa55cc"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td>
+        <td>&nbsp;</td>
+        <td width="100%">
+            <table width="100%" summary="list">
+                <tr>
+                    <td width="25%" valign=top><a href="os.html">os</a><br>
+                    </td>
+                    <td width="25%" valign=top><a href="pandas.html">pandas</a><br>
+                    </td>
+                    <td width="25%" valign=top><a href="matplotlib.html">matplotlib</a><br>
+                    </td>
+                    <td width="25%" valign=top></td>
+                </tr>
+            </table>
+        </td>
+    </tr>
+</table>
+<p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+    <tr bgcolor="#eeaa77">
+        <td colspan=3 valign=bottom>&nbsp;<br>
+            <font color="#ffffff" face="helvetica, arial"><big><strong>Functions</strong></big></font></td>
+    </tr>
+
+    <tr>
+        <td bgcolor="#eeaa77"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td>
+        <td>&nbsp;</td>
+        <td width="100%">
+            <dl>
+                <dt><a name="-create_dataframe_from_log"><strong>create_dataframe_from_log</strong></a>(log_path,
+                    log_sheet, log_type)
+                </dt>
+                <dd><tt>Create&nbsp;&nbsp;a&nbsp;DataFrame&nbsp;from&nbsp;a&nbsp;given&nbsp;log<br>
+                    :param&nbsp;log_path:&nbsp;pathway&nbsp;to&nbsp;log&nbsp;to&nbsp;create&nbsp;stats&nbsp;from&nbsp;&nbsp;(i.e.&nbsp;Screening,&nbsp;Enrollment)<br>
+                    :param&nbsp;log_sheet:&nbsp;name&nbsp;of&nbsp;the&nbsp;sheet&nbsp;in&nbsp;the&nbsp;log&nbsp;that&nbsp;contains&nbsp;data&nbsp;(i.e.&nbsp;Screening_Loo,&nbsp;Enrollment_Log)<br>
+                    :param&nbsp;log_type:&nbsp;type&nbsp;of&nbsp;log&nbsp;(i.e.&nbsp;Screening,&nbsp;Enrollment)<br>
+                    :return:</tt></dd>
+            </dl>
+            <dl>
+                <dt><a name="-get_basic_plot"><strong>get_basic_plot</strong></a>(df, log_pathway, log_type)</dt>
+                <dd><tt>Created&nbsp;basic&nbsp;bar&nbsp;graph&nbsp;plots&nbsp;for&nbsp;a&nbsp;log&nbsp;filtered&nbsp;on&nbsp;Months,&nbsp;Weeks,&nbsp;and&nbsp;WeekDays&nbsp;and&nbsp;saves&nbsp;them&nbsp;in<br>
+                    projects&nbsp;Data_Visualization&nbsp;directory<br>
+                    :param&nbsp;df:&nbsp;DataFrame&nbsp;to&nbsp;plot<br>
+                    :param&nbsp;log_pathway:&nbsp;Pathway&nbsp;to&nbsp;log&nbsp;DataFrame&nbsp;was&nbsp;created&nbsp;from<br>
+                    :param&nbsp;log_type:&nbsp;Type&nbsp;of&nbsp;Log&nbsp;(i.e.&nbsp;Screening,&nbsp;Enrollment,&nbsp;Follow&nbsp;Up<br>
+                    :return:</tt></dd>
+            </dl>
+            <dl>
+                <dt><a name="-get_basic_stats_by_date"><strong>get_basic_stats_by_date</strong></a>(log_path, log_sheet,
+                    log_type, start_date, end_date)
+                </dt>
+                <dd><tt>Get&nbsp;basic&nbsp;statistics&nbsp;for&nbsp;a&nbsp;log&nbsp;filtered&nbsp;by&nbsp;date<br>
+                    :param&nbsp;log_path:&nbsp;pathway&nbsp;to&nbsp;log&nbsp;to&nbsp;create&nbsp;stats&nbsp;from&nbsp;&nbsp;(i.e.&nbsp;Screening,&nbsp;Enrollment)<br>
+                    :param&nbsp;log_sheet:&nbsp;name&nbsp;of&nbsp;the&nbsp;sheet&nbsp;in&nbsp;the&nbsp;log&nbsp;that&nbsp;contains&nbsp;data&nbsp;(i.e.&nbsp;Screening_Loo,&nbsp;Enrollment_Log)<br>
+                    :param&nbsp;log_type:&nbsp;type&nbsp;of&nbsp;log&nbsp;(i.e.&nbsp;Screening,&nbsp;Enrollment)<br>
+                    :param&nbsp;start_date:&nbsp;initial&nbsp;date<br>
+                    :param&nbsp;end_date:&nbsp;end&nbsp;date<br>
+                    :return:&nbsp;data&nbsp;frame&nbsp;filtered&nbsp;on&nbsp;start_date&nbsp;and&nbsp;end_date</tt></dd>
+            </dl>
+            <dl>
+                <dt><a name="-get_stat_type"><strong>get_stat_type</strong></a>(df, stat_type)</dt>
+                <dd><tt>Get&nbsp;statistics&nbsp;from&nbsp;a&nbsp;data&nbsp;frame&nbsp;for&nbsp;the&nbsp;given&nbsp;type&nbsp;if&nbsp;DataFrame&nbsp;contains&nbsp;that&nbsp;column<br>
+                    :param&nbsp;df:&nbsp;DataFrame&nbsp;to&nbsp;get&nbsp;stats&nbsp;from<br>
+                    :param&nbsp;stat_type:&nbsp;stat&nbsp;type&nbsp;to&nbsp;look&nbsp;for&nbsp;(i.e.&nbsp;Age,&nbsp;Gender)<br>
+                    :return:&nbsp;No&nbsp;return</tt></dd>
+            </dl>
+            <dl>
+                <dt><a name="-get_stats"><strong>get_stats</strong></a>(log_path=None, log_sheet=None, log_type=None,
+                    data_frame=None)
+                </dt>
+                <dd><tt>Gets&nbsp;basic&nbsp;statistics&nbsp;for&nbsp;a&nbsp;log&nbsp;or&nbsp;a&nbsp;filtered&nbsp;DataFrame&nbsp;if&nbsp;given<br>
+                    :param&nbsp;log_path:&nbsp;pathway&nbsp;to&nbsp;log&nbsp;to&nbsp;create&nbsp;stats&nbsp;from&nbsp;&nbsp;(i.e.&nbsp;Screening,&nbsp;Enrollment)<br>
+                    :param&nbsp;log_sheet:&nbsp;name&nbsp;of&nbsp;the&nbsp;sheet&nbsp;in&nbsp;the&nbsp;log&nbsp;that&nbsp;contains&nbsp;data&nbsp;(i.e.&nbsp;Screening_Loo,&nbsp;Enrollment_Log)<br>
+                    :param&nbsp;log_type:&nbsp;type&nbsp;of&nbsp;log&nbsp;(i.e.&nbsp;Screening,&nbsp;Enrollment)<br>
+                    :param&nbsp;data_frame:&nbsp;pre-filtered&nbsp;DataFrame&nbsp;generate&nbsp;stats&nbsp;for<br>
+                    :return:&nbsp;No&nbsp;return</tt></dd>
+            </dl>
+            <dl>
+                <dt><a name="-get_stats_by_time"><strong>get_stats_by_time</strong></a>(log_path, log_sheet, log_type)
+                </dt>
+                <dd><tt>Get&nbsp;basic&nbsp;stats&nbsp;from&nbsp;a&nbsp;log&nbsp;by&nbsp;filtered&nbsp;by&nbsp;morning(7am-12pm),&nbsp;afternoon(12pm-4pm),&nbsp;evening(4pm-11pm),<br>
+                    overnight(11pm-7am).<br>
+                    :param&nbsp;log_path:&nbsp;pathway&nbsp;to&nbsp;log<br>
+                    :param&nbsp;log_sheet:&nbsp;sheet&nbsp;in&nbsp;log&nbsp;where&nbsp;date&nbsp;is&nbsp;stored&nbsp;(i.e.&nbsp;Screening_Log)<br>
+                    :param&nbsp;log_type:&nbsp;type&nbsp;of&nbsp;log&nbsp;your&nbsp;are&nbsp;searching&nbsp;(i.e.&nbsp;screening&nbsp;or&nbsp;enrollment)<br>
+                    :return:</tt></dd>
+            </dl>
+            <dl>
+                <dt><a name="-main"><strong>main</strong></a>()</dt>
+            </dl>
+            <dl>
+                <dt><a name="-print_stats"><strong>print_stats</strong></a>(stat_type:str, patient_dict:dict)</dt>
+                <dd><tt>Helper&nbsp;function&nbsp;for&nbsp;printing&nbsp;the&nbsp;stats&nbsp;from&nbsp;the&nbsp;patient&nbsp;data&nbsp;in&nbsp;a&nbsp;nice&nbsp;format<br>
+                    :param&nbsp;stat_type:&nbsp;Stat&nbsp;type&nbsp;to&nbsp;print&nbsp;(Age,&nbsp;Race,&nbsp;Etc)<br>
+                    :param&nbsp;patient_dict:&nbsp;dictionary&nbsp;containing&nbsp;stat&nbsp;data<br>
+                    :return:&nbsp;No&nbsp;return</tt></dd>
+            </dl>
+        </td>
+    </tr>
+</table>
+</body>
+</html>

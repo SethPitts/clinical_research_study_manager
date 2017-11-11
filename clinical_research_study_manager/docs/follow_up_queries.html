@@ -1,0 +1,118 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head><title>Python: module follow_up_queries</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+</head>
+<body bgcolor="#f0f0f8">
+
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="heading">
+    <tr bgcolor="#7799ee">
+        <td valign=bottom>&nbsp;<br>
+            <font color="#ffffff"
+                  face="helvetica, arial">&nbsp;<br><big><big><strong>follow_up_queries</strong></big></big></font></td
+        >
+        <td align=right valign=bottom
+        ><font color="#ffffff" face="helvetica, arial"><a href="../../">index</a><br><a
+                href="file:/home/beliefs22/PycharmProjects/clinical_research_study_manager/clinical_research_study_manager/follow_up_queries.py">/home/beliefs22/PycharmProjects/clinical_research_study_manager/clinical_research_study_manager/follow_up_queries.py</a></font>
+        </td>
+    </tr>
+</table>
+<p></p>
+<p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+    <tr bgcolor="#aa55cc">
+        <td colspan=3 valign=bottom>&nbsp;<br>
+            <font color="#ffffff" face="helvetica, arial"><big><strong>Modules</strong></big></font></td>
+    </tr>
+
+    <tr>
+        <td bgcolor="#aa55cc"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td>
+        <td>&nbsp;</td>
+        <td width="100%">
+            <table width="100%" summary="list">
+                <tr>
+                    <td width="25%" valign=top><a href="datetime.html">datetime</a><br>
+                    </td>
+                    <td width="25%" valign=top><a href="pandas.html">pandas</a><br>
+                    </td>
+                    <td width="25%" valign=top></td>
+                    <td width="25%" valign=top></td>
+                </tr>
+            </table>
+        </td>
+    </tr>
+</table>
+<p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+    <tr bgcolor="#eeaa77">
+        <td colspan=3 valign=bottom>&nbsp;<br>
+            <font color="#ffffff" face="helvetica, arial"><big><strong>Functions</strong></big></font></td>
+    </tr>
+
+    <tr>
+        <td bgcolor="#eeaa77"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td>
+        <td>&nbsp;</td>
+        <td width="100%">
+            <dl>
+                <dt><a name="-choose_query"><strong>choose_query</strong></a>(follow_up_log_path:str)</dt>
+                <dd><tt>Avaialble&nbsp;queries&nbsp;for&nbsp;a&nbsp;Follow&nbsp;Up&nbsp;log&nbsp;for&nbsp;a&nbsp;project<br>
+                    :param&nbsp;follow_up_log_path:&nbsp;Pathway&nbsp;to&nbsp;log<br>
+                    :return:&nbsp;No&nbsp;Return</tt></dd>
+            </dl>
+            <dl>
+                <dt><a name="-follow_up_by_custom_dates"><strong>follow_up_by_custom_dates</strong></a>(follow_up_log_path)
+                </dt>
+                <dd><tt>Find&nbsp;follow&nbsp;ups&nbsp;between&nbsp;a&nbsp;two&nbsp;dates<br>
+                    :param&nbsp;follow_up_log_path:&nbsp;pathway&nbsp;to&nbsp;log<br>
+                    :return:&nbsp;DataFrame&nbsp;filter&nbsp;on&nbsp;the&nbsp;two&nbsp;dates</tt></dd>
+            </dl>
+            <dl>
+                <dt><a name="-follow_up_scheduled_on_date"><strong>follow_up_scheduled_on_date</strong></a>(follow_up_log_path,
+                    follow_up_date=None)
+                </dt>
+                <dd>
+                    <tt>Create&nbsp;follow&nbsp;up&nbsp;DataFrame&nbsp;filtered&nbsp;on&nbsp;a&nbsp;specific&nbsp;date<br>
+                        :param&nbsp;follow_up_log_path:&nbsp;pathway&nbsp;to&nbsp;log<br>
+                        :param&nbsp;follow_up_date:&nbsp;date&nbsp;to&nbsp;filter&nbsp;DataFrame&nbsp;on&nbsp;if&nbsp;given<br>
+                        :return:&nbsp;Filtered&nbsp;DataFrame</tt></dd>
+            </dl>
+            <dl>
+                <dt>
+                    <a name="-follow_ups_scheduled_between_dates"><strong>follow_ups_scheduled_between_dates</strong></a>(follow_up_log_path,
+                    start_date=None, end_date=None)
+                </dt>
+                <dd><tt>Create&nbsp;Follow&nbsp;up&nbsp;DataFrame&nbsp;filtered&nbsp;between&nbsp;two&nbsp;dates<br>
+                    :param&nbsp;follow_up_log_path:&nbsp;pathway&nbsp;to&nbsp;log<br>
+                    :param&nbsp;start_date:&nbsp;start&nbsp;date&nbsp;if&nbsp;given<br>
+                    :param&nbsp;end_date:&nbsp;end&nbsp;date&nbsp;if&nbsp;given<br>
+                    :return:&nbsp;Filtered&nbsp;DataFrame</tt></dd>
+            </dl>
+            <dl>
+                <dt>
+                    <a name="-follow_ups_scheduled_for_this_week"><strong>follow_ups_scheduled_for_this_week</strong></a>(follow_up_log_path)
+                </dt>
+                <dd><tt>Get&nbsp;Follow&nbsp;Ups&nbsp;scheduled&nbsp;for&nbsp;this&nbsp;week<br>
+                    :return:&nbsp;&nbsp;DataFrame&nbsp;filtered&nbsp;on&nbsp;today</tt></dd>
+            </dl>
+            <dl>
+                <dt><a name="-follow_ups_scheduled_for_today"><strong>follow_ups_scheduled_for_today</strong></a>(follow_up_log_path)
+                </dt>
+                <dd><tt>Get&nbsp;Follow&nbsp;Ups&nbsp;Scheduled&nbsp;for&nbsp;Today<br>
+                    :param&nbsp;follow_up_log_path:&nbsp;pathway&nbsp;to&nbsp;log<br>
+                    :return:&nbsp;DataFrame&nbsp;filtered&nbsp;on&nbsp;today</tt></dd>
+            </dl>
+            <dl>
+                <dt><a name="-main"><strong>main</strong></a>()</dt>
+            </dl>
+            <dl>
+                <dt><a name="-patients_at_risk_of_being_lost"><strong>patients_at_risk_of_being_lost</strong></a>(follow_up_log_path)
+                </dt>
+                <dd><tt>Create&nbsp;Follow&nbsp;up&nbsp;data&nbsp;frame&nbsp;for&nbsp;at&nbsp;risk&nbsp;subjects5<br>
+                    :return:&nbsp;DataFrame&nbsp;containing&nbsp;subjects&nbsp;at&nbsp;risks&nbsp;of&nbsp;being&nbsp;lost&nbsp;to&nbsp;follow&nbsp;up</tt>
+                </dd>
+            </dl>
+        </td>
+    </tr>
+</table>
+</body>
+</html>
