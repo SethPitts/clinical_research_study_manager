@@ -25,6 +25,11 @@ def get_enrollment_log_stats_by_time(enrollment_log_path: str):
 
 
 def choose_query(enrollment_log_path: str):
+    """
+    Available queries for an Enrollment Log for a project
+    :param enrollment_log_path: Pathway to enrollment Log
+    :return:
+    """
     while True:
         # Ask for what the user would like to do
         print("1. Basic Enrollment Log Stats")
