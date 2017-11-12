@@ -1,6 +1,6 @@
 import datetime
 
-from clinical_research_study_manager.exceptions import InputException
+from clinical_research_study_manager.exceptions_test import InputException
 
 
 def get_date_info(time_point: str):
@@ -21,13 +21,10 @@ def get_date_info(time_point: str):
                 value_from_user = datetime.date.today()
                 return value_from_user
             if not value_from_user.strip():  # Bad entry
-                raise InputException(
-                    "Please enter a valid {} date in the format MM/DD/YYYY or leave blank for today".format(time_point),
-                    time_point)
+                raise InputException
         except ValueError:
             # TODO: add better error messages to show why this failed
-            print("Please enter a valid {} date in the format MM/DD/YYYY".format(time_point))
-            break
+            raise InputException
 
 
 def get_time_info(time_point: str):
@@ -50,14 +47,14 @@ def get_time_info(time_point: str):
                 value_from_user = datetime.time(int(hour), int(minute))
                 return value_from_user
             if not value_from_user.strip():  # Bad entry
-                raise InputException(
-                    'Please enter a valid {} time in the format HH:MM or leave blank for now'.format(time_point),
-                    time_point)
+                raise InputException
         except InputException as e:
             print(e)
+            break
         except ValueError:
-            print("Please enter a valid {} time in the format HH:MM or leave blank for now".format(time_point))
-            continue
+            raise InputException
+            # print("Please enter a valid {} time in the format HH:MM or leave blank for now".format(time_point))
+            # break
 
 
 # TODO: Add a validation dictionary for each type of input
@@ -91,12 +88,11 @@ def get_info_from_user(requested_info: str):
                     if validators[requested_info](value_from_user):
                         return value_from_user
                     else:
-                        raise InputException('Please enter a valid {} for subject'.format(requested_info),
-                                             requested_info)
+                        raise InputException
                 else:
                     return value_from_user
             if not value_from_user:  # Bad entry
-                raise InputException("Please enter a valid {} for subject".format(requested_info), requested_info)
+                raise InputException
         except InputException as e:
             print(e)
-            continue
+            raise InputException

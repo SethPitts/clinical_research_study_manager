@@ -16,10 +16,10 @@ def get_date_info(time_point: str):
             if value_from_user and value_from_user.strip():  # Need better validation
                 month, day, year = value_from_user.split("/")
                 value_from_user = datetime.date(int(year), int(month), int(day))
-                break
+                return value_from_user
             if not value_from_user:
                 value_from_user = datetime.date.today()
-                break
+                return value_from_user
             if not value_from_user.strip():  # Bad entry
                 raise InputException(
                     "Please enter a valid {} date in the format MM/DD/YYYY or leave blank for today".format(time_point),
@@ -27,8 +27,7 @@ def get_date_info(time_point: str):
         except ValueError:
             # TODO: add better error messages to show why this failed
             print("Please enter a valid {} date in the format MM/DD/YYYY".format(time_point))
-            continue
-    return value_from_user
+            break
 
 
 def get_time_info(time_point: str):
