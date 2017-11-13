@@ -16,6 +16,7 @@ $ python 3.5
 >>> Python 3.5.2 (default, Sep 14 2017, 22:51:06)
 
 $ pip install openpyxl
+$ pip install xlrd
 $ pip install pandas
 $ pip install numpy
 $ pip install matplotlib

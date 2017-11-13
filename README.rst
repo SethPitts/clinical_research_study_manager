@@ -21,6 +21,7 @@ Requires python and above
 
 
     $ pip install openpyxl
+    $ pip install xlrd
     $ pip install pandas
     $ pip install numpy
     $ pip install matplotlib
