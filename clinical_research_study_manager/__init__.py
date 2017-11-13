@@ -12,3 +12,4 @@ from . import load_project
 from . import screening_queries
 from . import stats_functions
 from . import study_manager
+from . import tests
