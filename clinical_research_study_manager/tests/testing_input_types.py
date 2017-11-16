@@ -1,13 +1,12 @@
 import datetime
 import unittest
-from unittest import TestCase
 from unittest.mock import patch
 
 from clinical_research_study_manager import data_request_functions_test as data_request_functions
 from clinical_research_study_manager import exceptions_test as exceptions
 
 
-class TestValidUserInput(TestCase):
+class TestValidUserInput(unittest.TestCase):
     @patch('builtins.input', lambda x: '11/1/2017')
     def test_date_input(self):
         print('testing valid date input')
@@ -92,9 +91,18 @@ class TestInvalidUserInput(unittest.TestCase):
             data_request_functions.get_time_info('Follow Up')
 
 
+def run_test():
+    valid_test = TestValidUserInput()
+    valid_test.run()
+    invalid_test = TestInvalidUserInput
+    invalid_test.run()
+
+
 def main():
-    unittest.main()
+    print("running form main main")
+    run_test()
 
 
 if __name__ == '__main__':
+    print("running from if main")
     main()
