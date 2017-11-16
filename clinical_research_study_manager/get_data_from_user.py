@@ -1,3 +1,7 @@
+"""
+This module is used to get data from a user for the different types of logs and return it in a format
+for adding to the log for the Clinical Research Study Manager package
+"""
 import os
 from collections import namedtuple
 

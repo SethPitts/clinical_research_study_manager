@@ -82,22 +82,33 @@ Current Projects are:
 ```
 ## Running the tests
 
-Coming Soon
-
-### Break down into end to end tests
-Explain what these tests test and why
-
 ```
-Coming Soon
+$ clinical_research_study_manager_tests
+Launching unittests with arguments python -m unittest /home/beliefs22/PycharmProjects/clinical_research_study_manager/build/lib/clinical_research_study_manager/tests/testing_input_types.py in /home/beliefs22/PycharmProjects/clinical_research_study_manager/build/lib/clinical_research_study_manager/tests
+testing invalid age input
+testing invalid date input
+testing invalid eligibility status input
+testing invalid enrollment status input
+testing invalid sex input
+testing invalid time input
+
+testing valid age input
+testing valid date input
+testing valid eligibility status input
+testing valid enrollment status input
+testing valid initials input
+testing valid reason ineligible input
+testing valid reason not enrolled input
+testing valid sex input
+testing valid time input
+
+Ran 15 tests in 0.022s
+
+OK
 ```
 
-### And coding style tests
+These test will check valid and invalid input expected from the user
 
-Coming Soon
-
-```
-Coming Soon
-```
 
 ## Authors
 

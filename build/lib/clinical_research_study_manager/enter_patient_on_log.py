@@ -1,3 +1,7 @@
+"""
+This module is used for having a user enter data on a screening, enrollment, follow up, or master log
+for the Clinical Research Study Manager package
+"""
 import os
 
 import clinical_research_study_manager as rsm

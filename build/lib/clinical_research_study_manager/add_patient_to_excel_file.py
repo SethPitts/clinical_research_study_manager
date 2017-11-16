@@ -1,3 +1,6 @@
+"""
+This module is used to add patient data to an excel file for the Clinical Research Study Manager package
+"""
 import sys
 
 import openpyxl

@@ -1,3 +1,6 @@
+"""
+This module is used calculate basic statistics for the Clinical Research Study Manager package
+"""
 import os
 from datetime import time
 

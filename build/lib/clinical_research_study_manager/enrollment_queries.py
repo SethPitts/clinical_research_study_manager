@@ -1,3 +1,6 @@
+"""
+This module is used to query data in an enrollment log for the Clinical Research Study Manager package
+"""
 from clinical_research_study_manager import stats_functions, data_request_functions
 
 

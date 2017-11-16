@@ -1,9 +1,12 @@
+"""
+This module is used to control various activities for the Clinical Research Study Manager package
+"""
+
 import argparse
 import os
 import sys
 
 from clinical_research_study_manager import create_directories, create_excel_files, load_project
-from clinical_research_study_manager.tests import testing_input_types
 
 parser = argparse.ArgumentParser(prog='Research Study Manager',
                                  description='Command line interface to manage some common research tasks')
@@ -12,7 +15,6 @@ parser.add_argument('-create_project', metavar='Project_Name',
 parser.add_argument('-load_project', metavar='Project_Name',
                     help='Loads Project Project_Name from the Projects directory for study activities')
 parser.add_argument('-list_projects', action='store_true', help='List available projects to load')
-parser.add_argument('-run_tests', action='store_true', help='Run test for the module')
 
 
 def main():
@@ -100,10 +102,6 @@ def start():
                 else:
                     print('Please enter a valid choice')
                     continue
-
-    # Run test
-    if args.run_tests is True:
-        testing_input_types.run_tests()
 
 
 if __name__ == '__main__':

@@ -1,3 +1,6 @@
+"""
+This module is used to test the data request functions for the Clinical Research Study Manager package
+"""
 import datetime
 
 from clinical_research_study_manager.exceptions_test import InputException

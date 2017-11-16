@@ -1,3 +1,6 @@
+"""
+This module is used to query data in a screening log for the Clinical Research Study Manager package
+"""
 from clinical_research_study_manager import data_request_functions, stats_functions
 
 

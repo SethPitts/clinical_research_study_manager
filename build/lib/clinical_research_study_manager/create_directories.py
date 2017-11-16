@@ -1,3 +1,6 @@
+"""
+This module is used to create directories for the Clinical Research Study Manager package
+"""
 import os
 import sys
 

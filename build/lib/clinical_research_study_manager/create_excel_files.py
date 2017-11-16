@@ -1,3 +1,6 @@
+"""
+This module is used to create excel files for the Clinical Research Study Manager package
+"""
 import os
 from collections import OrderedDict
 

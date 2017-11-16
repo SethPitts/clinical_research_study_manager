@@ -1,3 +1,6 @@
+"""
+This module is used to query data in a follow up log for the Clinical Research Study Manager package
+"""
 import datetime
 
 import pandas as pd

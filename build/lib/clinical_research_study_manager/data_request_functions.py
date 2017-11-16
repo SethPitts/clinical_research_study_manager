@@ -1,3 +1,6 @@
+"""
+This module is used to request data from a user for the Clinical Research Study Manager package
+"""
 import datetime
 
 from clinical_research_study_manager.exceptions import InputException

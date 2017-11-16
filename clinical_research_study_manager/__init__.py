@@ -1,3 +1,6 @@
+"""
+Package to control some common clinical research tasks from the commmand line
+"""
 from . import add_patient_to_excel_file
 from . import create_directories
 from . import create_excel_files

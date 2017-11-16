@@ -1,3 +1,6 @@
+"""
+This module is control the actions for a specific Project for the Clinical Research Study Manager package
+"""
 import os
 import sys
 

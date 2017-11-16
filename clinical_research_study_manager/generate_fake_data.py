@@ -1,3 +1,6 @@
+"""
+This module is used to generated some fake data in the screening, enrollment, and follow up logs for testing
+"""
 import os
 import random
 from collections import OrderedDict
